@@ -6,13 +6,7 @@ type BaseLayoutProps = {
 
 const BaseLayout = ({ children, ...props }: BaseLayoutProps) => {
   return (
-    <x.main
-      display="flex"
-      minH="100vh"
-      justifyContent="center"
-      alignItems="center"
-      {...props}
-    >
+    <x.main display="flex" minH="100vh" alignItems="center" {...props}>
       {children}
     </x.main>
   )

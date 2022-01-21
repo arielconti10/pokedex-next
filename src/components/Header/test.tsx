@@ -7,6 +7,5 @@ describe('<Header />', () => {
     render(<Header />)
 
     expect(screen.getByRole('heading')).toBeInTheDocument()
-    expect(screen.getByRole('navigation')).toBeInTheDocument()
   })
 })

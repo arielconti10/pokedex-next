@@ -3,6 +3,7 @@ import { useColorMode, x } from '@xstyled/styled-components'
 import BaseLayout from 'layouts/Base'
 
 import Button from 'components/Button'
+import Header from 'components/Header'
 
 const HomeLayout = () => {
   const [colorMode, setColorMode] = useColorMode()
@@ -13,6 +14,8 @@ const HomeLayout = () => {
 
   return (
     <BaseLayout flexDirection="column">
+      <Header />
+
       <Button onClick={toggleColor}>
         Toggle {colorMode === 'default' ? 'Dark' : 'Light'}
       </Button>
