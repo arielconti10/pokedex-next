@@ -1,6 +1,10 @@
-import { x } from '@xstyled/styled-components'
+import { SystemProps, x } from '@xstyled/styled-components'
 
-const Header = () => {
+export type HeaderProps = {
+  children?: React.ReactNode
+} & SystemProps
+
+const Header = ({ children }: HeaderProps) => {
   return (
     <x.header
       display="flex"
@@ -19,6 +23,8 @@ const Header = () => {
           <x.img src="/img/pokemon-logo.png" alt="logo" width="300" />
         </x.a>
       </x.h1>
+
+      {children}
     </x.header>
   )
 }

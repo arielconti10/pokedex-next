@@ -4,6 +4,7 @@ import BaseLayout from 'layouts/Base'
 
 import Button from 'components/Button'
 import Header from 'components/Header'
+import Navigation from 'components/Navigation'
 
 const HomeLayout = () => {
   const [colorMode, setColorMode] = useColorMode()
@@ -14,7 +15,9 @@ const HomeLayout = () => {
 
   return (
     <BaseLayout flexDirection="column">
-      <Header />
+      <Header>
+        <Navigation />
+      </Header>
 
       <Button onClick={toggleColor}>
         Toggle {colorMode === 'default' ? 'Dark' : 'Light'}

@@ -1,4 +1,5 @@
 import { x } from '@xstyled/styled-components'
+import Typography from 'components/Typography'
 
 const Navigation = () => (
   <x.nav
@@ -10,13 +11,13 @@ const Navigation = () => (
     p={2}
   >
     <x.a href="/" color="white">
-      Home
+      <Typography>Home</Typography>
     </x.a>
     <x.a href="/about" color="white">
-      About
+      <Typography>About</Typography>
     </x.a>
     <x.a href="/contact" color="white">
-      Contact
+      <Typography>Contact</Typography>
     </x.a>
   </x.nav>
 )
