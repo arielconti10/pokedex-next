@@ -48,11 +48,7 @@ const poke3: Pokemon = {
 }
 
 const HomeLayout = () => {
-  const [colorMode, setColorMode] = useColorMode()
-
-  // const toggleColor = () => {
-  //   setColorMode(colorMode === 'default' ? 'dark' : 'default')
-  // }
+  const [colorMode] = useColorMode()
 
   return (
     <BaseLayout flexDirection="column">
