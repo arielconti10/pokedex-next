@@ -1,6 +1,11 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 
+import { QueryClientProvider, QueryClient } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+const queryClient = new QueryClient()
+
 import {
   ThemeProvider,
   Preflight,
@@ -37,14 +42,17 @@ const App = ({ Component, pageProps }: AppProps) => {
         options={{ showSpinner: false }}
       />
 
-      <ThemeProvider theme={theme}>
-        <ColorModeProvider>
-          <Preflight />
-          <GlobalStyles />
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <ThemeProvider theme={theme}>
+          <ColorModeProvider>
+            <Preflight />
+            <GlobalStyles />
 
-          <Component {...pageProps} />
-        </ColorModeProvider>
-      </ThemeProvider>
+            <Component {...pageProps} />
+          </ColorModeProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
     </>
   )
 }
