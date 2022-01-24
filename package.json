@@ -1,7 +1,11 @@
 {
-  "name": "next-boilerplate",
+  "name": "pokedex-next",
   "version": "1.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arielconti10/pokedex-next.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -36,6 +40,7 @@
     "preact-render-to-string": "^5.1.19",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
     "react-query": "^3.34.11",
     "styled-components": "^5.3.3"
   },
