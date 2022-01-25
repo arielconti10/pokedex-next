@@ -45,10 +45,10 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
         <>
           <x.h1>{pokemonData.name}</x.h1>
           <x.img
-            src={pokemonData.sprites.front_default}
+            src={pokemonData.sprites.other?.['official-artwork'].front_default}
             alt={pokemonData.name}
-            width="150"
-            height="150"
+            width="200px"
+            height="200px"
           />
         </>
       )}
