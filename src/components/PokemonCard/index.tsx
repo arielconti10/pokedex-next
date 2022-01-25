@@ -4,6 +4,7 @@ import { x } from '@xstyled/styled-components'
 import usePokemon from 'hooks/pokemon/usePokemon'
 import { useColorModeValue } from 'hooks/use-color-mode'
 import Pokemon from 'types'
+import Image from 'next/image'
 
 export type PokemonCardProps = {
   pokemonId: number
@@ -44,8 +45,11 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
       {pokemonData.id && (
         <>
           <x.h1>{pokemonData.name}</x.h1>
-          <x.img
-            src={pokemonData.sprites.other?.['official-artwork'].front_default}
+          <Image
+            src={
+              pokemonData.sprites.other?.['official-artwork']
+                .front_default as string
+            }
             alt={pokemonData.name}
             width="200px"
             height="200px"
