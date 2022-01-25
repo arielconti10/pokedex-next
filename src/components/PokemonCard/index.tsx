@@ -1,11 +1,26 @@
+import { useEffect, useState } from 'react'
 import { x } from '@xstyled/styled-components'
+
+import usePokemon from 'hooks/pokemon/usePokemon'
+import { useColorModeValue } from 'hooks/use-color-mode'
 import Pokemon from 'types'
 
 export type PokemonCardProps = {
-  pokemon: Pokemon
+  pokemonId: number
+  pokemonUrl: string
 }
 
-const PokemonCard = ({ pokemon }: PokemonCardProps) => {
+const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
+  const { data } = usePokemon(pokemonUrl)
+
+  const [pokemonData, setPokemonData] = useState<Pokemon>({} as Pokemon)
+
+  useEffect(() => {
+    if (data) {
+      setPokemonData(data)
+    }
+  }, [data])
+
   return (
     <x.div
       display="flex"
@@ -18,13 +33,29 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
       p="2"
       m="2"
       w="100%"
-      maxWidth="300px"
+      maxWidth="350px"
+      minHeight="300px"
+      backgroundColor={{
+        _: useColorModeValue('gray.100', 'gray.900'),
+        hover: 'gray.100'
+      }}
+      cursor="pointer"
     >
-      <x.h1>{pokemon.name}</x.h1>
-      <x.p>{pokemon.description}</x.p>
-      {pokemon.types.map((type) => (
-        <x.p key={type.url}>{type.name}</x.p>
-      ))}
+      {pokemonData.id && (
+        <>
+          <x.h1>{pokemonData.name}</x.h1>
+          <x.img
+            src={pokemonData.sprites.front_default}
+            alt={pokemonData.name}
+            width="150"
+            height="150"
+          />
+        </>
+      )}
+      {pokemonData.types &&
+        pokemonData.types.map((poketype) => (
+          <x.div key={poketype.type.name}>{poketype.type.name}</x.div>
+        ))}
     </x.div>
   )
 }

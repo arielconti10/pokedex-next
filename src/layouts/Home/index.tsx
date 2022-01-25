@@ -1,54 +1,26 @@
+import { useEffect, useState } from 'react'
 import { useColorMode, x } from '@xstyled/styled-components'
 
 import BaseLayout from 'layouts/Base'
+
+import usePokemons from 'hooks/pokemon/usePokemons'
 
 // import Button from 'components/Button'
 import Header from 'components/Header'
 import Navigation from 'components/Navigation'
 import PokemonCard from 'components/PokemonCard'
-import Pokemon from 'types'
-
-const poke1: Pokemon = {
-  id: 1,
-  name: 'Bulbasaur',
-  description:
-    'A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon.',
-  types: [
-    {
-      name: 'Grass',
-      url: 'https://pokeapi.co/api/v2/type/12/'
-    }
-  ]
-}
-
-const poke2: Pokemon = {
-  id: 2,
-  name: 'Ivysaur',
-  description:
-    'When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.',
-  types: [
-    {
-      name: 'Grass',
-      url: 'https://pokeapi.co/api/v2/type/12/'
-    }
-  ]
-}
-
-const poke3: Pokemon = {
-  id: 3,
-  name: 'Venusaur',
-  description:
-    'The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.',
-  types: [
-    {
-      name: 'Grass',
-      url: 'https://pokeapi.co/api/v2/type/12/'
-    }
-  ]
-}
 
 const HomeLayout = () => {
   const [colorMode] = useColorMode()
+  const [pokemons, setPokemons] = useState([{ name: '', url: '' }])
+
+  const { data, isLoading } = usePokemons()
+
+  useEffect(() => {
+    if (data) {
+      setPokemons(data)
+    }
+  }, [data])
 
   return (
     <BaseLayout flexDirection="column">
@@ -56,7 +28,13 @@ const HomeLayout = () => {
         <Navigation />
       </Header>
 
-      <x.div m={2} p={2} justifyContent="center" alignContent="center">
+      <x.div
+        m={2}
+        p={2}
+        justifyContent="center"
+        alignContent="center"
+        flexGrow="grow"
+      >
         <x.input
           type="text"
           placeholder="Search"
@@ -77,9 +55,14 @@ const HomeLayout = () => {
         alignItems="center"
         w="100%"
       >
-        <PokemonCard pokemon={poke1} />
-        <PokemonCard pokemon={poke2} />
-        <PokemonCard pokemon={poke3} />
+        {!isLoading &&
+          pokemons.map((pokemon, index) => (
+            <PokemonCard
+              key={index}
+              pokemonId={index + 1}
+              pokemonUrl={pokemon.url}
+            />
+          ))}
       </x.div>
     </BaseLayout>
   )

@@ -1,12 +1,17 @@
 import { useQuery } from 'react-query'
 
 import api from 'services/api'
+import Pokemon from 'types'
 
-const getPokemons = async () => {
-  const { data } = await api.get('pokemon')
-  return data.results
+const getPokemon = async (url: string) => {
+  url = url.replace('https://pokeapi.co/api/v2/', '')
+  if (url) {
+    const { data } = await api.get<Pokemon>(url)
+
+    return data
+  }
 }
 
-export default function usePokemons() {
-  return useQuery('pokemons', getPokemons)
+export default function usePokemon(pokemonUrl: string) {
+  return useQuery(['pokemon', pokemonUrl], () => getPokemon(pokemonUrl))
 }
