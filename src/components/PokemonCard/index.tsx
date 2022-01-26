@@ -5,6 +5,8 @@ import usePokemon from 'hooks/pokemon/usePokemon'
 
 import Pokemon, { PokemonTypeColors, Type } from 'types'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import IconComponent from 'components/TypeIcon'
 
 export type PokemonCardProps = {
   pokemonId: number
@@ -13,6 +15,7 @@ export type PokemonCardProps = {
 
 const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
   const { data } = usePokemon(pokemonUrl)
+  const router = useRouter()
 
   const [pokemonData, setPokemonData] = useState<Pokemon>({} as Pokemon)
   const [backgroundColor, setBackgroundColor] = useState<string>('')
@@ -21,7 +24,7 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
     if (data) {
       setPokemonData(data)
       const backgroundColor = getBackgroundColor(data.types[0])
-      setBackgroundColor(backgroundColor[1].medium)
+      setBackgroundColor(backgroundColor[1].light)
     }
   }, [data])
 
@@ -30,10 +33,6 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
       ([key]) => key === type.type.name
     )
     return backgroundColor
-  }
-
-  if (pokemonData.types && pokemonData.types.length > 0) {
-    getBackgroundColor(pokemonData.types[0])
   }
 
   const leftPad = (number: number, targetLength: number): string => {
@@ -63,6 +62,7 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
       cursor="pointer"
       position="relative"
       transition="all 0.3s ease-in-out"
+      onClick={() => router.push(`/pokemon/${pokemonData.id}`)}
     >
       {pokemonData.id && (
         <>
@@ -94,19 +94,23 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
       <x.div display="flex" flexDirection="row" gap={2}>
         {pokemonData.types &&
           pokemonData.types.map((poketype) => (
-            <x.p
-              backgroundColor={{
-                _: 'white'
-              }}
+            <x.div
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              gap={2}
               p={2}
               my={2}
               borderRadius="lg"
               fontSize="sm"
               key={poketype.type.name}
-              style={{ color: getBackgroundColor(poketype)[1].medium }}
+              background={{
+                _: getBackgroundColor(poketype)[1].medium
+              }}
             >
-              {poketype.type.name}
-            </x.p>
+              <IconComponent name={poketype.type.name} />
+              <x.p>{poketype.type.name}</x.p>
+            </x.div>
           ))}
       </x.div>
     </x.div>
