@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { x } from '@xstyled/styled-components'
-
-import usePokemon from 'hooks/pokemon/usePokemon'
-
-import Pokemon, { PokemonTypeColors, Type } from 'types'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+
+import Pokemon, { PokemonTypeColors, Type } from 'types'
+import usePokemon from 'hooks/pokemon/usePokemon'
 import IconComponent from 'components/TypeIcon'
+import { PokemonCardWrapper } from './styles'
+import Pokeball from '../../../public/img/pokeball.svg'
 
 export type PokemonCardProps = {
   pokemonId: number
@@ -44,48 +45,38 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
   }
 
   return (
-    <x.div
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      borderRadius="lg"
-      p="2"
-      m="2"
-      w="100%"
-      maxWidth="350px"
-      minHeight="320px"
-      backgroundColor={{
-        _: backgroundColor
-      }}
-      boxShadow={`0 0 10px 1px ${backgroundColor}`}
-      cursor="pointer"
-      position="relative"
-      transition="all 0.3s ease-in-out"
+    <PokemonCardWrapper
+      backgroundColor={backgroundColor}
       onClick={() => router.push(`/pokemon/${pokemonData.id}`)}
     >
+      <Pokeball />
+
       {pokemonData.id && (
         <>
           <x.p
             fontSize="6xl"
             fontWeight="semibold"
-            opacity={0.8}
+            opacity={1}
             position="absolute"
             top="0"
             pointerEvents="none"
+            zIndex={2}
             className="text-6xl font-semibold text-black text-opacity-25 absolute tracking-xl top-1/8 pointer-events-none"
           >
             # {leftPad(pokemonData.id, 3)}
           </x.p>
-          <Image
-            src={
-              pokemonData.sprites.other?.['official-artwork']
-                .front_default as string
-            }
-            alt={pokemonData.name}
-            width="200px"
-            height="200px"
-          />
+          <x.div zIndex={5}>
+            <Image
+              src={
+                pokemonData.sprites.other?.['official-artwork']
+                  .front_default as string
+              }
+              alt={pokemonData.name}
+              width="180px"
+              height="180px"
+              objectFit="cover"
+            />
+          </x.div>
         </>
       )}
       <x.h1 textTransform="capitalize" fontSize="2xl" fontWeight="semibold">
@@ -107,13 +98,14 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
               background={{
                 _: getBackgroundColor(poketype)[1].medium
               }}
+              zIndex={1}
             >
               <IconComponent name={poketype.type.name} />
               <x.p>{poketype.type.name}</x.p>
             </x.div>
           ))}
       </x.div>
-    </x.div>
+    </PokemonCardWrapper>
   )
 }
 

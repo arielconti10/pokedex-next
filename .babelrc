@@ -11,7 +11,8 @@
           "@xstyled/styled-components/native",
           "@xstyled/styled-components/primitives"
         ]
-      }
+      },
+      "inline-react-svg"
     ]
   ]
 }

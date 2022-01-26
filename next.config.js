@@ -25,6 +25,11 @@ module.exports = withBundleAnalyzer(
     // Replace React with Preact
     webpack: (config, { dev, isServer }) => {
       // only in client production build
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ['@svgr/webpack']
+      })
+
       if (!dev && !isServer) {
         Object.assign(config.resolve.alias, {
           react: 'preact/compat',
