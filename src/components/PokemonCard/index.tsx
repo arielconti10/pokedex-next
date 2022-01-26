@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { x } from '@xstyled/styled-components'
 
 import usePokemon from 'hooks/pokemon/usePokemon'
-import { useColorModeValue } from 'hooks/use-color-mode'
-import Pokemon from 'types'
+
+import Pokemon, { PokemonTypeColors, Type } from 'types'
 import Image from 'next/image'
 
 export type PokemonCardProps = {
@@ -15,12 +15,34 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
   const { data } = usePokemon(pokemonUrl)
 
   const [pokemonData, setPokemonData] = useState<Pokemon>({} as Pokemon)
+  const [backgroundColor, setBackgroundColor] = useState<string>('')
 
   useEffect(() => {
     if (data) {
       setPokemonData(data)
+      const backgroundColor = getBackgroundColor(data.types[0])
+      setBackgroundColor(backgroundColor[1].medium)
     }
   }, [data])
+
+  function getBackgroundColor(type: Type) {
+    const [backgroundColor] = Object.entries(PokemonTypeColors).filter(
+      ([key]) => key === type.type.name
+    )
+    return backgroundColor
+  }
+
+  if (pokemonData.types && pokemonData.types.length > 0) {
+    getBackgroundColor(pokemonData.types[0])
+  }
+
+  const leftPad = (number: number, targetLength: number): string => {
+    let output = Math.abs(number).toString()
+    while (output.length < Math.abs(targetLength)) {
+      output = '0' + output
+    }
+    return output
+  }
 
   return (
     <x.div
@@ -28,23 +50,33 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      border="1px solid"
-      borderColor="gray.200"
       borderRadius="lg"
       p="2"
       m="2"
       w="100%"
       maxWidth="350px"
-      minHeight="300px"
+      minHeight="320px"
       backgroundColor={{
-        _: useColorModeValue('gray.100', 'gray.900'),
-        hover: 'gray.100'
+        _: backgroundColor
       }}
+      boxShadow={`0 0 10px 1px ${backgroundColor}`}
       cursor="pointer"
+      position="relative"
+      transition="all 0.3s ease-in-out"
     >
       {pokemonData.id && (
         <>
-          <x.h1>{pokemonData.name}</x.h1>
+          <x.p
+            fontSize="6xl"
+            fontWeight="semibold"
+            opacity={0.8}
+            position="absolute"
+            top="0"
+            pointerEvents="none"
+            className="text-6xl font-semibold text-black text-opacity-25 absolute tracking-xl top-1/8 pointer-events-none"
+          >
+            # {leftPad(pokemonData.id, 3)}
+          </x.p>
           <Image
             src={
               pokemonData.sprites.other?.['official-artwork']
@@ -56,10 +88,27 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
           />
         </>
       )}
-      {pokemonData.types &&
-        pokemonData.types.map((poketype) => (
-          <x.div key={poketype.type.name}>{poketype.type.name}</x.div>
-        ))}
+      <x.h1 textTransform="capitalize" fontSize="2xl" fontWeight="semibold">
+        {pokemonData.name}
+      </x.h1>
+      <x.div display="flex" flexDirection="row" gap={2}>
+        {pokemonData.types &&
+          pokemonData.types.map((poketype) => (
+            <x.p
+              backgroundColor={{
+                _: 'white'
+              }}
+              p={2}
+              my={2}
+              borderRadius="lg"
+              fontSize="sm"
+              key={poketype.type.name}
+              style={{ color: getBackgroundColor(poketype)[1].medium }}
+            >
+              {poketype.type.name}
+            </x.p>
+          ))}
+      </x.div>
     </x.div>
   )
 }
