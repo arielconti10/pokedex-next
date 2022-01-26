@@ -5,9 +5,6 @@ import BaseLayout from 'layouts/Base'
 
 import usePokemons from 'hooks/pokemon/usePokemons'
 
-// import Button from 'components/Button'
-import Header from 'components/Header'
-import Navigation from 'components/Navigation'
 import PokemonCard from 'components/PokemonCard'
 
 const HomeLayout = () => {
@@ -23,11 +20,7 @@ const HomeLayout = () => {
   }, [data])
 
   return (
-    <BaseLayout flexDirection="column">
-      <Header>
-        <Navigation />
-      </Header>
-
+    <BaseLayout>
       <x.div
         m={2}
         p={2}

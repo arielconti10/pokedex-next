@@ -1,4 +1,6 @@
 import { x, SystemProps } from '@xstyled/styled-components'
+import Header from 'components/Header'
+import Navigation from 'components/Navigation'
 
 type BaseLayoutProps = {
   children?: React.ReactNode
@@ -12,8 +14,12 @@ const BaseLayout = ({ children, ...props }: BaseLayoutProps) => {
       h="fit-content"
       justifyContent="flex-start"
       alignItems="center"
+      flexDirection="column"
       {...props}
     >
+      <Header>
+        <Navigation />
+      </Header>
       {children}
     </x.main>
   )
