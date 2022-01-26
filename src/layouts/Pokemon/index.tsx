@@ -3,6 +3,7 @@ import { x } from '@xstyled/styled-components'
 import Pokemon from 'types'
 import usePokemonSpecie from 'hooks/pokemon/usePokemonSpecie'
 import { useRouter } from 'next/router'
+import BaseLayout from 'layouts/Base'
 
 const PokemonLayout = () => {
   const router = useRouter()
@@ -19,12 +20,12 @@ const PokemonLayout = () => {
   }, [data])
 
   return (
-    <x.div>
+    <BaseLayout>
       <x.h1>Pokemon Layout</x.h1>
       <x.div>
         <x.h2>{pokemonData.name}</x.h2>
       </x.div>
-    </x.div>
+    </BaseLayout>
   )
 }
 
