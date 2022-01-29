@@ -1,4 +1,4 @@
-import { x } from '@xstyled/styled-components'
+import { x, useColorMode } from '@xstyled/styled-components'
 import { useInfiniteQuery } from 'react-query'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -8,6 +8,7 @@ import PokemonCard from 'components/PokemonCard'
 import api from 'services/api'
 
 const HomeLayout = () => {
+  const [colorMode] = useColorMode()
   const getPokemons = async ({ pageParam = 0 }) => {
     const { data } = await api.get<PokemonResult>(
       `pokemon?limit=21&offset=${pageParam}`
@@ -30,6 +31,32 @@ const HomeLayout = () => {
 
   return (
     <BaseLayout>
+      <x.div
+        w="100%"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <x.input
+          background="transparent"
+          border="1px solid"
+          borderRadius="10px"
+          borderColor={colorMode === 'dark' ? 'cool-gray-500' : 'gray'}
+          color="gray.700"
+          fontSize="lg"
+          fontWeight="bold"
+          height="40px"
+          placeholder="Search"
+          w="800px"
+          m={4}
+          p={2}
+          type="text"
+          onChange={(e) => {
+            console.log(e.target.value)
+          }}
+        />
+      </x.div>
+
       {status === 'success' && (
         <InfiniteScroll
           dataLength={(data?.pages.length as number) * 20}

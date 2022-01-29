@@ -15,8 +15,8 @@ export interface PokemonResult {
 }
 
 const getPokemons = async () => {
-  const { data } = await api.get<PokemonResult>('pokemon')
-  return data.results
+  const { data } = await api.get<PokemonResult>(`pokemon?limit=1118`)
+  return data
 }
 
 export default function usePokemons() {
