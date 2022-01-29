@@ -1,4 +1,4 @@
-import { useColorMode, x } from '@xstyled/styled-components'
+import { x } from '@xstyled/styled-components'
 import { useInfiniteQuery } from 'react-query'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -8,10 +8,7 @@ import PokemonCard from 'components/PokemonCard'
 import api from 'services/api'
 
 const HomeLayout = () => {
-  const [colorMode] = useColorMode()
-
   const getPokemons = async ({ pageParam = 0 }) => {
-    console.log(pageParam)
     const { data } = await api.get<PokemonResult>(
       `pokemon?limit=21&offset=${pageParam}`
     )
@@ -27,42 +24,16 @@ const HomeLayout = () => {
           const offset = lastPage.next.split('offset=')[1].split('&')[0]
           return offset
         }
-      },
-      keepPreviousData: true,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false
+      }
     }
   )
 
   return (
     <BaseLayout>
-      <x.div
-        m={2}
-        p={2}
-        justifyContent="center"
-        alignContent="center"
-        flexGrow="grow"
-      >
-        <x.input
-          type="text"
-          placeholder="Search"
-          borderBottom="1px solid"
-          borderColor={colorMode === 'default' ? 'gray.200' : 'white'}
-          p="2"
-          m="2"
-          w="930px"
-          backgroundColor="transparent"
-        />
-      </x.div>
-
       {status === 'success' && (
         <InfiniteScroll
           dataLength={(data?.pages.length as number) * 20}
-          next={() => {
-            console.log('called next page')
-            console.log(status, hasNextPage)
-            fetchNextPage()
-          }}
+          next={fetchNextPage}
           hasMore={hasNextPage as boolean}
           loader={<h4>Loading...</h4>}
           scrollThreshold={1}
