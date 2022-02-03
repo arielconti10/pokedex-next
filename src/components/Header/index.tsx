@@ -1,4 +1,5 @@
 import { SystemProps, x } from '@xstyled/styled-components'
+import Image from 'next/image'
 
 export type HeaderProps = {
   children?: React.ReactNode
@@ -20,7 +21,12 @@ const Header = ({ children }: HeaderProps) => {
     >
       <x.h1>
         <x.a href="/">
-          <x.img src="/img/pokemon-logo.png" alt="logo" width="300" />
+          <Image
+            src="/img/pokemon-logo.png"
+            alt="logo"
+            width="300"
+            height="110"
+          />
         </x.a>
       </x.h1>
 
