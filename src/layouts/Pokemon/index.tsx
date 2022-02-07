@@ -20,14 +20,14 @@ const PokemonLayout = () => {
 
   const [pokemonInfo, setPokemonInfo] = useState<Pokemon>({} as Pokemon)
 
-  const { data } = usePokemonSpecie(id as string)
+  const { data, isLoading, isSuccess } = usePokemonSpecie(id as string)
   const { data: pokemonInfoData } = usePokemon(id as string)
 
   useEffect(() => {
-    if (data) {
+    if (isSuccess && data) {
       setPokemonData(data)
     }
-  }, [data])
+  }, [data, isSuccess])
 
   useEffect(() => {
     if (pokemonInfoData) {
@@ -62,91 +62,95 @@ const PokemonLayout = () => {
 
   return (
     <BaseLayout>
-      <x.div
-        w="70%"
-        h="650px"
-        borderRadius="lg"
-        boxShadow="lg"
-        display="flex"
-        flexDirection="row"
-        justifyContent="space-between"
-      >
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
         <x.div
-          display="flex"
-          flexDirection="column"
-          w="50%"
-          h="100%"
-          mx="auto"
-          borderRadius="lg 0 0 lg"
+          w="70%"
+          h="650px"
+          borderRadius="lg"
           boxShadow="lg"
-          backgroundColor={
-            selectedBackgroundColor ? selectedBackgroundColor.light : '#fff'
-          }
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-between"
         >
-          <x.div px={{ _: 4, md: 8 }}>
-            <x.p
-              mt="4"
-              fontSize={{ _: '2xl', md: '3xl' }}
-              color="white"
-              fontWeight="bold"
-              className="text-md mt-4 text-white font-medium"
+          <x.div
+            display="flex"
+            flexDirection="column"
+            w="50%"
+            h="100%"
+            mx="auto"
+            borderRadius="lg 0 0 lg"
+            boxShadow="lg"
+            backgroundColor={
+              selectedBackgroundColor ? selectedBackgroundColor.light : '#fff'
+            }
+          >
+            <x.div px={{ _: 4, md: 8 }}>
+              <x.p
+                mt="4"
+                fontSize={{ _: '2xl', md: '3xl' }}
+                color="white"
+                fontWeight="bold"
+                className="text-md mt-4 text-white font-medium"
+              >
+                #{leftPad(pokemonData.id, 3)}
+              </x.p>
+              <x.h1
+                fontSize={{ _: '2xl', md: '3xl', lg: '4xl' }}
+                color="white"
+                fontWeight="bold"
+                pb="4"
+                textTransform="capitalize"
+              >
+                {pokemonData.name}
+              </x.h1>
+            </x.div>
+            <x.div
+              position="relative"
+              textAlign="center"
+              my="auto"
+              w="full"
+              h={96}
             >
-              #{leftPad(pokemonData.id, 3)}
-            </x.p>
-            <x.h1
-              fontSize={{ _: '2xl', md: '3xl', lg: '4xl' }}
-              color="white"
-              fontWeight="bold"
-              pb="4"
-              textTransform="capitalize"
-            >
-              {pokemonData.name}
-            </x.h1>
+              <x.h1
+                position="absolute"
+                mt={2}
+                fontSize="6xl"
+                w="full"
+                opacity="0.5"
+                fontWeight="extraBold"
+                overflow="hidden"
+                top={0}
+                left={0}
+                zIndex={0}
+              >
+                {kanjiName && kanjiName.name}
+              </x.h1>
+              <x.figure mt={10}>
+                {pokemonInfoData && pokemonInfoData.sprites && (
+                  <Image
+                    src={
+                      pokemonInfoData.sprites.other?.['official-artwork']
+                        .front_default as string
+                    }
+                    width="325"
+                    height="325"
+                  />
+                )}
+              </x.figure>
+            </x.div>
           </x.div>
           <x.div
-            position="relative"
-            textAlign="center"
-            my="auto"
-            w="full"
-            h={96}
+            borderRadius="0 lg lg 0"
+            boxShadow="lg"
+            w="50%"
+            backgroundColor={colorMode === 'default' ? 'black' : 'white'}
           >
-            <x.h1
-              position="absolute"
-              mt={2}
-              fontSize="6xl"
-              w="full"
-              opacity="0.5"
-              fontWeight="extraBold"
-              overflow="hidden"
-              top={0}
-              left={0}
-              zIndex={0}
-            >
-              {kanjiName && kanjiName.name}
-            </x.h1>
-            <x.figure mt={10}>
-              {pokemonInfoData && pokemonInfoData.sprites && (
-                <Image
-                  src={
-                    pokemonInfoData.sprites.other?.['official-artwork']
-                      .front_default as string
-                  }
-                  width="325"
-                  height="325"
-                />
-              )}
-            </x.figure>
+            <x.h2>Pokemon stats</x.h2>
           </x.div>
         </x.div>
-        <x.div
-          borderRadius="0 lg lg 0"
-          boxShadow="lg"
-          w="50%"
-          backgroundColor={colorMode === 'default' ? 'black' : 'white'}
-        >
-          <x.h2>Pokemon stats</x.h2>
-        </x.div>
-      </x.div>
+      )}
     </BaseLayout>
   )
 }
