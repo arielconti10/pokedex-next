@@ -11,7 +11,7 @@ export const PokemonCardWrapper = styled.div<PokemonCardWrapperProps>`
   align-items: center;
   justify-content: center;
 
-  width: sm;
+  width: 25%;
   height: 100%;
 
   background-color: ${({ backgroundColor }) => backgroundColor};
