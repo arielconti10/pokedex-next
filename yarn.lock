@@ -3346,10 +3346,10 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.1.tgz#20f18294f797f2209b5f65c8e3b5c8e8261d127c"
   integrity sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==
 
-"@types/styled-components@5.1.20":
-  version "5.1.20"
-  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.1.20.tgz#83c545d1b793b846c231ff18e93019ccd2867972"
-  integrity sha512-TvpQceFwnxJJsAzR1aHsYpL5DxWMHRzM2/0EA6sGtRjV6DtJubmNxeoPMPiIPQzKEGNHccwObXO7Hug/iwm1Xw==
+"@types/styled-components@5.1.22":
+  version "5.1.22"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.1.22.tgz#ee6206582d3da11fa2f9951e858aefebee37ff20"
+  integrity sha512-zQzf/0aGtgFDjB942f8IaKA6UilFziDza9wXkAX5mpiSWA/FBZBU6yUavvczulTvoR6759h6CH8HuuIcJDBgZA==
   dependencies:
     "@types/hoist-non-react-statics" "*"
     "@types/react" "*"
@@ -11216,11 +11216,6 @@ react-colorful@^5.1.2:
   version "5.5.1"
   resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.5.1.tgz#29d9c4e496f2ca784dd2bb5053a3a4340cfaf784"
   integrity sha512-M1TJH2X3RXEt12sWkpa6hLc/bbYS0H6F4rIqjQZ+RxNBstpY67d9TrFXtqdZwhpmBXcCwEi7stKqFue3ZRkiOg==
-
-react-cool-inview@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/react-cool-inview/-/react-cool-inview-2.0.8.tgz#f8b7aeaf6e880e443c339b8d5e2719374ff8fdc1"
-  integrity sha512-D8ilAp7HwRxRMA1xRAvXZF8yhbL/6WWD5nxYX+K1GwbGQuMmCkrr5Bhm/2Mgn8XlFLzAU9frQ7g0UILxt1SnOQ==
 
 react-docgen-typescript@^2.0.0:
   version "2.2.2"
