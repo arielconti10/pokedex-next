@@ -1,4 +1,4 @@
-import PokemonLayout from 'layouts/_pokemon'
+import PokemonLayout from 'layouts/pokemon'
 
 const PokemonPage = () => <PokemonLayout />
 
