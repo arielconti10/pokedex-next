@@ -16,7 +16,7 @@ const theme = {
   },
   colors: {
     ...defaultTheme.colors,
-    bg: '#fff',
+    bg: '#f2f1f0',
     text: '#333',
     link: '#1d4ed8',
     modes: {

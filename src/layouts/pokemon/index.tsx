@@ -8,6 +8,7 @@ import usePokemonSpecie from 'hooks/pokemon/usePokemonSpecie'
 import usePokemon from 'hooks/pokemon/usePokemon'
 import Pokemon, { PokemonSpecie, PokemonTypeColors } from 'types'
 import Image from 'next/image'
+import Typography from 'components/Typography'
 
 const PokemonLayout = () => {
   const router = useRouter()
@@ -50,7 +51,6 @@ const PokemonLayout = () => {
   const backgroundColors =
     pokemonInfo.types &&
     pokemonInfo.types.map(({ type }) => {
-      console.log(type)
       const [[, backgroundColor]] = Object.entries(PokemonTypeColors).filter(
         ([key]) => key === type.name
       )
@@ -60,13 +60,15 @@ const PokemonLayout = () => {
 
   const selectedBackgroundColor = backgroundColors && backgroundColors[0]
 
+  console.log(pokemonInfoData && pokemonInfoData.stats)
+
   return (
     <BaseLayout>
       {isLoading ? (
         <div>Loading...</div>
       ) : (
         <x.div
-          w="70%"
+          w="75%"
           h="650px"
           borderRadius="lg"
           boxShadow="lg"
@@ -145,9 +147,86 @@ const PokemonLayout = () => {
             borderRadius="0 lg lg 0"
             boxShadow="lg"
             w="50%"
-            backgroundColor={colorMode === 'default' ? 'black' : 'white'}
+            backgroundColor={colorMode === 'default' ? '#f2f1f0' : 'white'}
+            py={6}
+            px={10}
           >
-            <x.h2>Pokemon stats</x.h2>
+            <x.div>
+              <x.h3
+                color={colorMode === 'default' ? 'white' : 'black'}
+                fontSize="lg"
+                fontWeight="bold"
+              >
+                Pokemon Data
+              </x.h3>
+              <Typography
+                color={colorMode === 'default' ? 'gray-200' : 'gray-600'}
+                my={4}
+                p={0}
+              >
+                {pokemonData.flavor_text_entries &&
+                  pokemonData.flavor_text_entries[0].flavor_text}
+              </Typography>
+            </x.div>
+            <x.div>
+              {pokemonInfoData &&
+                pokemonInfoData.stats &&
+                pokemonInfoData.stats.map((st, key) => (
+                  <x.div
+                    key={key}
+                    display="flex"
+                    my={5}
+                    w="450px"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <x.div
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="space-between"
+                      w="180px"
+                    >
+                      <x.span textTransform="capitalize" color="gray-600">
+                        {st.stat.name === 'Special-Attack'
+                          ? 'Sp Atk'
+                          : st.stat.name}
+                      </x.span>
+                      <x.span textTransform="capitalize" color="gray-600">
+                        {st.base_stat}
+                      </x.span>
+                    </x.div>
+
+                    <x.div
+                      w="250px"
+                      backgroundColor="gray-200"
+                      borderRadius="8px"
+                      maxHeight="10px"
+                    >
+                      <x.div
+                        maxHeight="10px"
+                        w={`${st.base_stat}%`}
+                        backgroundColor={
+                          selectedBackgroundColor
+                            ? selectedBackgroundColor.light
+                            : ''
+                        }
+                        boxShadow={`2px 2px 10px 2px ${
+                          selectedBackgroundColor
+                            ? selectedBackgroundColor.light
+                            : 'rgba(0, 0, 0, 0.1)'
+                        }`}
+                        borderRadius="8px"
+                        paddingLeft={2}
+                        color={
+                          colorMode === 'default' ? 'gray-800' : 'gray-200'
+                        }
+                      >
+                        &nbsp;
+                      </x.div>
+                    </x.div>
+                  </x.div>
+                ))}
+            </x.div>
           </x.div>
         </x.div>
       )}
