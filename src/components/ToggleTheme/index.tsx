@@ -7,6 +7,7 @@ export const ToggleTheme = ({ ...props }: SystemProps) => {
 
   return (
     <x.button
+      aria-label="Toggle theme"
       appearance="none"
       color={{ _: 'currentColor', hover: 'primary-700' }}
       bg="transparent"
