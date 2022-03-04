@@ -20,7 +20,13 @@ module.exports = withBundleAnalyzer(
       disable: !isProd
     },
     images: {
-      domains: ['images.ctfassets.net', 'raw.githubusercontent.com']
+      domains: ['images.ctfassets.net', 'raw.githubusercontent.com'],
+      dangerouslyAllowSVG: true,
+      contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+      minimumCacheTTL: 60,
+      maxWidth: 1920,
+      maxHeight: 1080,
+      quality: 80
     },
     // Replace React with Preact
     webpack: (config, { dev, isServer }) => {

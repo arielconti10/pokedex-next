@@ -26,6 +26,7 @@ const Header = ({ children }: HeaderProps) => {
             alt="logo"
             width="300"
             height="110"
+            priority
           />
         </x.a>
       </x.h1>
