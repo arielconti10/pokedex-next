@@ -70,7 +70,6 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
                 width={180}
                 height={180}
                 objectFit="cover"
-                priority
               />
             </x.div>
           </>
