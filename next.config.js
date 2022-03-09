@@ -23,7 +23,7 @@ module.exports = withBundleAnalyzer(
       domains: ['images.ctfassets.net', 'raw.githubusercontent.com'],
       dangerouslyAllowSVG: true,
       contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-      minimumCacheTTL: 60,
+      minimumCacheTTL: 120,
       maxWidth: 1920,
       maxHeight: 1080,
       quality: 80
