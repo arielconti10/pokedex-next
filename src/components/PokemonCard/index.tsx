@@ -61,6 +61,7 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
             </x.p>
             <x.div zIndex={5}>
               <Image
+                loading="lazy"
                 src={
                   pokemonData.sprites.other?.['official-artwork']
                     .front_default as string
