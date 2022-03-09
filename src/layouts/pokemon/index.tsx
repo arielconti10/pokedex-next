@@ -147,23 +147,15 @@ const PokemonLayout = () => {
             borderRadius="0 lg lg 0"
             boxShadow="lg"
             w="50%"
-            backgroundColor={colorMode === 'default' ? '#f2f1f0' : 'white'}
+            backgroundColor="white"
             py={6}
             px={10}
           >
             <x.div>
-              <x.h3
-                color={colorMode === 'default' ? 'white' : 'black'}
-                fontSize="lg"
-                fontWeight="bold"
-              >
+              <x.h3 color="gray-600" fontSize="lg" fontWeight="bold">
                 Pokemon Data
               </x.h3>
-              <Typography
-                color={colorMode === 'default' ? 'gray-200' : 'gray-600'}
-                my={4}
-                p={0}
-              >
+              <Typography color="gray-600" my={4} p={0}>
                 {pokemonData.flavor_text_entries &&
                   pokemonData.flavor_text_entries[0].flavor_text}
               </Typography>

@@ -57,15 +57,23 @@ const HomeLayout = () => {
         />
       </x.div>
 
-      {status === 'success' && (
-        <InfiniteScroll
-          dataLength={(data?.pages.length as number) * 20}
-          next={fetchNextPage}
-          hasMore={hasNextPage as boolean}
-          loader={<h4>Loading...</h4>}
-          scrollThreshold={1}
-        >
-          {data?.pages.map((page, key) => (
+      <InfiniteScroll
+        dataLength={
+          status === 'success' && data ? (data.pages.length as number) * 20 : 0
+        }
+        next={fetchNextPage}
+        hasMore={hasNextPage as boolean}
+        loader={<h4>Loading...</h4>}
+        scrollThreshold={1}
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
+        {status === 'success' &&
+          data &&
+          data.pages.map((page, key) => (
             <x.div
               display="flex"
               flexDirection="row"
@@ -75,17 +83,18 @@ const HomeLayout = () => {
               w="100%"
               key={key}
             >
-              {page.results.map((pokemon, index) => (
-                <PokemonCard
-                  key={index}
-                  pokemonId={index + 1}
-                  pokemonUrl={pokemon.url}
-                />
-              ))}
+              {page.results.map((pokemon, index) => {
+                return (
+                  <PokemonCard
+                    key={index}
+                    pokemonId={index + 1}
+                    pokemonUrl={pokemon.url}
+                  />
+                )
+              })}
             </x.div>
           ))}
-        </InfiniteScroll>
-      )}
+      </InfiniteScroll>
     </BaseLayout>
   )
 }

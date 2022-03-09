@@ -1,10 +1,6 @@
 import { styled } from '@xstyled/styled-components'
 
-interface PokemonCardWrapperProps {
-  backgroundColor: string
-}
-
-export const PokemonCardWrapper = styled.div<PokemonCardWrapperProps>`
+export const PokemonCardWrapper = styled.div`
   display: flex;
 
   flex-direction: column;
@@ -14,10 +10,8 @@ export const PokemonCardWrapper = styled.div<PokemonCardWrapperProps>`
   width: 25%;
   height: 100%;
 
-  background-color: ${({ backgroundColor }) => backgroundColor};
-
   background-size: 200px;
-  box-shadow: 0px 0px 10px ${({ backgroundColor }) => backgroundColor};} ;
+
   border-radius: 10px;
 
   margin: 20px;

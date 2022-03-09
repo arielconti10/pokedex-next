@@ -6,7 +6,7 @@ import Pokemon, { PokemonTypeColors, Type } from 'types'
 import usePokemon from 'hooks/pokemon/usePokemon'
 import IconComponent from 'components/TypeIcon'
 import { PokemonCardWrapper } from './styles'
-import Pokeball from '../../../public/img/pokeball.svg'
+
 import Link from 'next/link'
 
 export type PokemonCardProps = {
@@ -45,10 +45,8 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
 
   return (
     <Link href={`/pokemon/${pokemonData.id}`} passHref>
-      <PokemonCardWrapper backgroundColor={backgroundColor}>
-        <Pokeball />
-
-        {pokemonData.id && (
+      <PokemonCardWrapper style={{ background: backgroundColor }}>
+        {pokemonData.id ? (
           <>
             <x.p
               fontSize="6xl"
@@ -67,14 +65,14 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
                   pokemonData.sprites.other?.['official-artwork']
                     .front_default as string
                 }
-                alt={pokemonData.name}
+                alt={pokemonData.name || 'Pokemon name'}
                 width="180px"
                 height="180px"
                 objectFit="cover"
               />
             </x.div>
           </>
-        )}
+        ) : null}
         <x.h1 textTransform="capitalize" fontSize="2xl" fontWeight="semibold">
           {pokemonData.name}
         </x.h1>
