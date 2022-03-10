@@ -74,9 +74,7 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
             </x.div>
           </>
         ) : null}
-        <x.h1 textTransform="capitalize" fontSize="2xl" fontWeight="semibold">
-          {pokemonData.name}
-        </x.h1>
+
         <x.div display="flex" flexDirection="row" gap={2}>
           {pokemonData.types &&
             pokemonData.types.map((poketype) => (
@@ -100,6 +98,17 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
               </x.div>
             ))}
         </x.div>
+        <x.h1
+          textTransform="capitalize"
+          fontSize="2xl"
+          fontWeight="semibold"
+          borderRadius="10px"
+          backgroundColor="gray-100"
+          color="gray-700"
+          padding="10px"
+        >
+          {pokemonData.name}
+        </x.h1>
       </PokemonCardWrapper>
     </Link>
   )
