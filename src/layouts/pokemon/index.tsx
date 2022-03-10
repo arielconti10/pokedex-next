@@ -158,7 +158,6 @@ const PokemonLayout = () => {
                   <Tab>
                     <x.h3
                       color="gray-700"
-                      borderBottom="2px solid red"
                       paddingBottom="5px"
                       fontWeight="bold"
                       fontSize="18px"
@@ -166,8 +165,26 @@ const PokemonLayout = () => {
                       Biography
                     </x.h3>
                   </Tab>
-                  <Tab>Stats</Tab>
-                  <Tab>Evolutions</Tab>
+                  <Tab>
+                    <x.h3
+                      color="gray-700"
+                      paddingBottom="5px"
+                      fontWeight="bold"
+                      fontSize="18px"
+                    >
+                      Stats
+                    </x.h3>
+                  </Tab>
+                  <Tab>
+                    <x.h3
+                      color="gray-700"
+                      paddingBottom="5px"
+                      fontWeight="bold"
+                      fontSize="18px"
+                    >
+                      Evolutions
+                    </x.h3>
+                  </Tab>
                 </x.div>
               </TabList>
 
