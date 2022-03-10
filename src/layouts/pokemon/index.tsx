@@ -259,10 +259,10 @@ const PokemonLayout = () => {
                 </x.div>
               </TabPanel>
               <TabPanel>
-                <h2>Any content 2</h2>
+                <h2>Stats</h2>
               </TabPanel>
               <TabPanel>
-                <h2>Any content 3</h2>
+                <h2>Evolutions</h2>
               </TabPanel>
             </Tabs>
           </x.div>
