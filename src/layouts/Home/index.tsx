@@ -1,5 +1,5 @@
 import { x, useColorMode } from '@xstyled/styled-components'
-import { useInfiniteQuery } from 'react-query'
+import { InfiniteData, useInfiniteQuery } from 'react-query'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { PokemonResult } from 'hooks/pokemon/usePokemons'
@@ -7,8 +7,13 @@ import BaseLayout from 'layouts/Base'
 import PokemonCard from 'components/PokemonCard'
 import api from 'services/api'
 
-const HomeLayout = () => {
+interface HomeLayoutProps {
+  initialData: PokemonResult
+}
+
+const HomeLayout = ({ initialData }: HomeLayoutProps) => {
   const [colorMode] = useColorMode()
+
   const getPokemons = async ({ pageParam = 0 }) => {
     const { data } = await api.get<PokemonResult>(
       `pokemon?limit=21&offset=${pageParam}`
@@ -20,6 +25,7 @@ const HomeLayout = () => {
     'pokemons',
     getPokemons,
     {
+      initialData: { pages: [initialData] } as InfiniteData<PokemonResult>,
       getNextPageParam: (lastPage) => {
         if (lastPage.next) {
           const offset = lastPage.next.split('offset=')[1].split('&')[0]
@@ -59,7 +65,9 @@ const HomeLayout = () => {
 
       <InfiniteScroll
         dataLength={
-          status === 'success' && data ? (data.pages.length as number) * 20 : 0
+          status === 'success' && data.pages
+            ? (data.pages.length as number) * 20
+            : 0
         }
         next={fetchNextPage}
         hasMore={hasNextPage as boolean}
@@ -72,7 +80,7 @@ const HomeLayout = () => {
         }
       >
         {status === 'success' &&
-          data &&
+          data.pages &&
           data.pages.map((page, key) => (
             <x.div
               display="flex"
