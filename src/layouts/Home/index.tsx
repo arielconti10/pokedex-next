@@ -65,7 +65,7 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
 
       <InfiniteScroll
         dataLength={
-          status === 'success' && data.pages
+          status === 'success' && data && data.pages
             ? (data.pages.length as number) * 20
             : 0
         }

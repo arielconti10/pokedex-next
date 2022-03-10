@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useColorMode, x } from '@xstyled/styled-components'
 import { useRouter } from 'next/router'
 
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+
 import BaseLayout from 'layouts/Base'
 
 import usePokemonSpecie from 'hooks/pokemon/usePokemonSpecie'
@@ -59,8 +61,6 @@ const PokemonLayout = () => {
     })
 
   const selectedBackgroundColor = backgroundColors && backgroundColors[0]
-
-  console.log(pokemonInfoData && pokemonInfoData.stats)
 
   return (
     <BaseLayout>
@@ -143,6 +143,7 @@ const PokemonLayout = () => {
               </x.figure>
             </x.div>
           </x.div>
+
           <x.div
             borderRadius="0 lg lg 0"
             boxShadow="lg"
@@ -151,74 +152,102 @@ const PokemonLayout = () => {
             py={6}
             px={10}
           >
-            <x.div>
-              <x.h3 color="gray-600" fontSize="lg" fontWeight="bold">
-                Pokemon Data
-              </x.h3>
-              <Typography color="gray-600" my={4} p={0}>
-                {pokemonData.flavor_text_entries &&
-                  pokemonData.flavor_text_entries[0].flavor_text}
-              </Typography>
-            </x.div>
-            <x.div>
-              {pokemonInfoData &&
-                pokemonInfoData.stats &&
-                pokemonInfoData.stats.map((st, key) => (
-                  <x.div
-                    key={key}
-                    display="flex"
-                    my={5}
-                    w="450px"
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
-                    <x.div
-                      display="flex"
-                      flexDirection="row"
-                      justifyContent="space-between"
-                      w="180px"
+            <Tabs>
+              <TabList>
+                <x.div display="flex" flexDirection="row" gap="10px">
+                  <Tab>
+                    <x.h3
+                      color="gray-700"
+                      borderBottom="2px solid red"
+                      paddingBottom="5px"
+                      fontWeight="bold"
+                      fontSize="18px"
                     >
-                      <x.span textTransform="capitalize" color="gray-600">
-                        {st.stat.name === 'Special-Attack'
-                          ? 'Sp Atk'
-                          : st.stat.name}
-                      </x.span>
-                      <x.span textTransform="capitalize" color="gray-600">
-                        {st.base_stat}
-                      </x.span>
-                    </x.div>
+                      Biography
+                    </x.h3>
+                  </Tab>
+                  <Tab>Stats</Tab>
+                  <Tab>Evolutions</Tab>
+                </x.div>
+              </TabList>
 
-                    <x.div
-                      w="250px"
-                      backgroundColor="gray-200"
-                      borderRadius="8px"
-                      maxHeight="10px"
-                    >
+              <TabPanel>
+                <x.div>
+                  <x.h3 color="gray-600" fontSize="lg" fontWeight="bold">
+                    Pokemon Data
+                  </x.h3>
+                  <Typography color="gray-600" my={4} p={0}>
+                    {pokemonData.flavor_text_entries &&
+                      pokemonData.flavor_text_entries[0].flavor_text}
+                  </Typography>
+                </x.div>
+                <x.div>
+                  {pokemonInfoData &&
+                    pokemonInfoData.stats &&
+                    pokemonInfoData.stats.map((st, key) => (
                       <x.div
-                        maxHeight="10px"
-                        w={`${st.base_stat}%`}
-                        backgroundColor={
-                          selectedBackgroundColor
-                            ? selectedBackgroundColor.light
-                            : ''
-                        }
-                        boxShadow={`2px 2px 10px 2px ${
-                          selectedBackgroundColor
-                            ? selectedBackgroundColor.light
-                            : 'rgba(0, 0, 0, 0.1)'
-                        }`}
-                        borderRadius="8px"
-                        paddingLeft={2}
-                        color={
-                          colorMode === 'default' ? 'gray-800' : 'gray-200'
-                        }
+                        key={key}
+                        display="flex"
+                        my={5}
+                        w="450px"
+                        justifyContent="space-between"
+                        alignItems="center"
                       >
-                        &nbsp;
+                        <x.div
+                          display="flex"
+                          flexDirection="row"
+                          justifyContent="space-between"
+                          w="180px"
+                        >
+                          <x.span textTransform="capitalize" color="gray-600">
+                            {st.stat.name === 'Special-Attack'
+                              ? 'Sp Atk'
+                              : st.stat.name}
+                          </x.span>
+                          <x.span textTransform="capitalize" color="gray-600">
+                            {st.base_stat}
+                          </x.span>
+                        </x.div>
+
+                        <x.div
+                          w="250px"
+                          backgroundColor="gray-200"
+                          borderRadius="8px"
+                          maxHeight="10px"
+                        >
+                          <x.div
+                            maxHeight="10px"
+                            w={`${st.base_stat}%`}
+                            backgroundColor={
+                              selectedBackgroundColor
+                                ? selectedBackgroundColor.light
+                                : ''
+                            }
+                            boxShadow={`2px 2px 10px 2px ${
+                              selectedBackgroundColor
+                                ? selectedBackgroundColor.light
+                                : 'rgba(0, 0, 0, 0.1)'
+                            }`}
+                            borderRadius="8px"
+                            paddingLeft={2}
+                            color={
+                              colorMode === 'default' ? 'gray-800' : 'gray-200'
+                            }
+                          >
+                            &nbsp;
+                          </x.div>
+                        </x.div>
                       </x.div>
-                    </x.div>
-                  </x.div>
-                ))}
-            </x.div>
+                    ))}
+                </x.div>
+              </TabPanel>
+              <TabPanel>
+                <h2>Any content 2</h2>
+              </TabPanel>
+              <TabPanel>
+                <h2>Any content 3</h2>
+              </TabPanel>
+            </Tabs>
           </x.div>
         </x.div>
       )}
