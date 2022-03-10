@@ -80,6 +80,7 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
         }
       >
         {status === 'success' &&
+          data &&
           data.pages &&
           data.pages.map((page, key) => (
             <x.div
