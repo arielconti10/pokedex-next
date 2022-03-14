@@ -273,7 +273,10 @@ export interface PokemonSpecie {
   gender_rate: number
   genera: Genus[]
   generation: Color
-  growth_rate: Color
+  growth_rate: {
+    name: string
+    url: string
+  }
   habitat: Color
   has_gender_differences: boolean
   hatch_counter: number
