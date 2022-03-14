@@ -48,7 +48,7 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
           border="1px solid"
           borderRadius="10px"
           borderColor={colorMode === 'dark' ? 'cool-gray-500' : 'gray'}
-          color="gray.700"
+          color={colorMode === 'dark' ? 'gray-300' : 'gray-900'}
           fontSize="lg"
           fontWeight="bold"
           height="40px"
@@ -57,9 +57,6 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
           m={4}
           p={2}
           type="text"
-          onChange={(e) => {
-            console.log(e.target.value)
-          }}
         />
       </x.div>
 
