@@ -6,6 +6,8 @@ import { PokemonResult } from 'hooks/pokemon/usePokemons'
 import BaseLayout from 'layouts/Base'
 import PokemonCard from 'components/PokemonCard'
 import api from 'services/api'
+import { useEffect, useState } from 'react'
+import useDebounce from 'hooks/useDebounce'
 
 interface HomeLayoutProps {
   initialData: PokemonResult
@@ -13,6 +15,14 @@ interface HomeLayoutProps {
 
 const HomeLayout = ({ initialData }: HomeLayoutProps) => {
   const [colorMode] = useColorMode()
+  const [search, setSearch] = useState<string>('')
+  const [searchedPokemons, setSearchedPokemons] = useState<
+    {
+      name: string
+      url: string
+    }[]
+  >()
+  const debouncedValue = useDebounce<string>(search, 500)
 
   const getPokemons = async ({ pageParam = 0 }) => {
     const { data } = await api.get<PokemonResult>(
@@ -20,6 +30,27 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
     )
     return data
   }
+
+  const getAllPokemons = async () => {
+    const { data } = await api.get<PokemonResult>(`pokemon?limit=929`)
+    return data
+  }
+
+  useEffect(() => {
+    if (debouncedValue) {
+      const pokemons = getAllPokemons()
+      pokemons.then((data) => {
+        const filteredPokemons = data.results.filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(debouncedValue.toLowerCase())
+        )
+        setSearchedPokemons(filteredPokemons)
+      })
+    }
+
+    if (!debouncedValue) {
+      setSearchedPokemons([])
+    }
+  }, [debouncedValue])
 
   const { data, status, fetchNextPage, hasNextPage } = useInfiniteQuery(
     'pokemons',
@@ -57,50 +88,69 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
           m={4}
           p={2}
           type="text"
+          onChange={(e) => setSearch(e.target.value)}
         />
       </x.div>
 
-      <InfiniteScroll
-        dataLength={
-          status === 'success' && data && data.pages
-            ? (data.pages.length as number) * 20
-            : 0
-        }
-        next={fetchNextPage}
-        hasMore={hasNextPage as boolean}
-        loader={<h4>Loading...</h4>}
-        scrollThreshold={1}
-        endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
-        {status === 'success' &&
-          data &&
-          data.pages &&
-          data.pages.map((page, key) => (
-            <x.div
-              display="flex"
-              flexDirection="row"
-              flexWrap="wrap"
-              justifyContent="center"
-              alignItems="center"
-              w="100%"
-              key={key}
-            >
-              {page.results.map((pokemon, index) => {
-                return (
-                  <PokemonCard
-                    key={index}
-                    pokemonId={index + 1}
-                    pokemonUrl={pokemon.url}
-                  />
-                )
-              })}
-            </x.div>
+      {searchedPokemons && searchedPokemons.length > 0 ? (
+        <x.div
+          display="flex"
+          flexDirection="row"
+          flexWrap="wrap"
+          justifyContent="center"
+          alignItems="center"
+          w="100%"
+        >
+          {searchedPokemons.map((pokemon, index) => (
+            <PokemonCard
+              key={index}
+              pokemonId={index + 1}
+              pokemonUrl={pokemon.url}
+            />
           ))}
-      </InfiniteScroll>
+        </x.div>
+      ) : (
+        <InfiniteScroll
+          dataLength={
+            status === 'success' && data && data.pages
+              ? (data.pages.length as number) * 20
+              : 0
+          }
+          next={fetchNextPage}
+          hasMore={hasNextPage as boolean}
+          loader={<h4>Loading...</h4>}
+          scrollThreshold={1}
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          {data &&
+            data.pages &&
+            data.pages.map((page, key) => (
+              <x.div
+                display="flex"
+                flexDirection="row"
+                flexWrap="wrap"
+                justifyContent="center"
+                alignItems="center"
+                w="100%"
+                key={key}
+              >
+                {page.results.map((pokemon, index) => {
+                  return (
+                    <PokemonCard
+                      key={index}
+                      pokemonId={index + 1}
+                      pokemonUrl={pokemon.url}
+                    />
+                  )
+                })}
+              </x.div>
+            ))}
+        </InfiniteScroll>
+      )}
     </BaseLayout>
   )
 }
