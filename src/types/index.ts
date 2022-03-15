@@ -19,6 +19,11 @@ export interface Pokemon {
   weight: number
 }
 
+export type NamedAPIResource = {
+  name: string
+  url: string
+}
+
 export interface Ability {
   ability: Species
   is_hidden: boolean
@@ -265,7 +270,7 @@ export interface PokemonSpecie {
   capture_rate: number
   color: Color
   egg_groups: Color[]
-  evolution_chain: EvolutionChain
+  evolution_chain: NamedAPIResource
   evolves_from_species: null
   flavor_text_entries: FlavorTextEntry[]
   // form_descriptions: any[]
@@ -298,8 +303,36 @@ export interface Color {
   url: string
 }
 
-export interface EvolutionChain {
-  url: string
+export type ChainLink = {
+  is_baby: boolean
+  species: NamedAPIResource
+  evolution_details: {
+    item: NamedAPIResource
+    trigger: NamedAPIResource
+    gender: number
+    held_item: NamedAPIResource
+    known_move: NamedAPIResource
+    known_move_type: NamedAPIResource
+    location: NamedAPIResource
+    min_level: NamedAPIResource
+    min_happiness: NamedAPIResource
+    min_beauty: NamedAPIResource
+    min_affection: NamedAPIResource
+    needs_overworld_rain: boolean
+    party_species: NamedAPIResource
+    party_type: NamedAPIResource
+    relative_physical_stats: number
+    time_of_day: string
+    trade_species: NamedAPIResource
+    turn_upside_down: boolean
+  }[]
+  evolves_to: ChainLink[]
+}
+
+export type EvolutionChain = {
+  id: number
+  babyTriggerItem: NamedAPIResource
+  chain: ChainLink
 }
 
 export interface FlavorTextEntry {
