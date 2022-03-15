@@ -32,7 +32,7 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
   }
 
   const getAllPokemons = async () => {
-    const { data } = await api.get<PokemonResult>(`pokemon?limit=929`)
+    const { data } = await api.get<PokemonResult>(`pokemon?limit=898`)
     return data
   }
 
