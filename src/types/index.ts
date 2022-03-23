@@ -19,7 +19,7 @@ export interface Pokemon {
   weight: number
 }
 
-export type NamedAPIResource = {
+export interface NamedAPIResource {
   name: string
   url: string
 }
