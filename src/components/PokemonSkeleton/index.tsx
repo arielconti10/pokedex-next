@@ -16,17 +16,6 @@ const PokemonSkeleton = () => {
         position="relative"
         backgroundColor="#e3e3e3"
       >
-        <x.p
-          fontSize="6xl"
-          fontWeight="semibold"
-          color="black"
-          position="absolute"
-          top="10px"
-          pointerEvents="none"
-        >
-          megapenis
-        </x.p>
-
         <div
           className="inset-x-auto bottom-0 absolute z-20"
           style={{

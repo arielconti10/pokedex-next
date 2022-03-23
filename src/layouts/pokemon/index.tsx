@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { x } from '@xstyled/styled-components'
 import { useRouter } from 'next/router'
 
@@ -8,11 +8,19 @@ import BaseLayout from 'layouts/Base'
 
 import usePokemonSpecie from 'hooks/pokemon/usePokemonSpecie'
 import usePokemon from 'hooks/pokemon/usePokemon'
-import Pokemon, { PokemonSpecie, PokemonTypeColors } from 'types'
+import Pokemon, {
+  ChainLink,
+  EvolutionChain,
+  PokemonSpecie,
+  PokemonTypeColors
+} from 'types'
 import Image from 'next/image'
 
 import { PokemonBio } from 'components/PokemonBio'
 import { PokemonStats } from 'components/PokemonStats'
+import api from 'services/api'
+import PokemonEvolution from 'components/PokemonEvolution'
+import { leftPad } from 'utils'
 
 const PokemonLayout = () => {
   const router = useRouter()
@@ -24,8 +32,53 @@ const PokemonLayout = () => {
 
   const [pokemonInfo, setPokemonInfo] = useState<Pokemon>({} as Pokemon)
 
+  const [pokemonEvolutions, setPokemonEvolutions] = useState<EvolutionChain>()
+  const [pokemonEvolutinsFormatted, setPokemonEvolutinsFormatted] = useState<
+    {
+      name: string
+      url: string
+    }[]
+  >()
+
   const { data, isLoading, isSuccess } = usePokemonSpecie(id as string)
   const { data: pokemonInfoData } = usePokemon(id as string)
+
+  // get pokemon evolutions
+  const getPokemonEvolutions = useCallback(async () => {
+    if (pokemonData && pokemonData.evolution_chain) {
+      const { data } = await api.get<EvolutionChain>(
+        `evolution-chain/${pokemonData.evolution_chain.url.split('/')[6]}`
+      )
+
+      setPokemonEvolutions(data)
+    }
+  }, [pokemonData])
+
+  const getPokemonEvolutionsFormatted = useCallback(() => {
+    if (pokemonEvolutions) {
+      const pokemonFormatted = []
+
+      pokemonFormatted.push({
+        name: pokemonEvolutions.chain.species.name,
+        url: pokemonEvolutions.chain.species.url
+      })
+
+      const recursive = (evolvesTo: ChainLink[]) => {
+        if (evolvesTo.length > 0) {
+          evolvesTo.forEach((evolve: ChainLink) => {
+            pokemonFormatted.push({
+              name: evolve.species.name,
+              url: evolve.species.url
+            })
+            recursive(evolve.evolves_to)
+          })
+        }
+      }
+
+      recursive(pokemonEvolutions.chain.evolves_to)
+      setPokemonEvolutinsFormatted(pokemonFormatted)
+    }
+  }, [pokemonEvolutions])
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -36,16 +89,13 @@ const PokemonLayout = () => {
   useEffect(() => {
     if (pokemonInfoData) {
       setPokemonInfo(pokemonInfoData)
+      getPokemonEvolutions()
     }
-  }, [pokemonInfoData])
+  }, [pokemonInfoData, getPokemonEvolutions])
 
-  const leftPad = (number: number, targetLength: number): string => {
-    let output = Math.abs(number).toString()
-    while (output.length < Math.abs(targetLength)) {
-      output = '0' + output
-    }
-    return output
-  }
+  useEffect(() => {
+    getPokemonEvolutionsFormatted()
+  }, [pokemonEvolutions, getPokemonEvolutionsFormatted])
 
   const kanjiName =
     pokemonData.names &&
@@ -209,7 +259,28 @@ const PokemonLayout = () => {
               </TabPanel>
 
               <TabPanel>
-                <h2>Evolutions</h2>
+                <x.div
+                  display="flex"
+                  flexDirection="row"
+                  gap="20px"
+                  justifyContent="space-between"
+                >
+                  {pokemonEvolutinsFormatted &&
+                    pokemonEvolutinsFormatted?.map(
+                      (pokemonFormatted, index) => (
+                        <x.div key={pokemonFormatted.name}>
+                          <PokemonEvolution pokemonInfo={pokemonFormatted} />
+                          {index !== pokemonEvolutinsFormatted.length - 1 && (
+                            <Image
+                              src="/assets/caretRight.svg"
+                              width="20px"
+                              height="20px"
+                            />
+                          )}
+                        </x.div>
+                      )
+                    )}
+                </x.div>
               </TabPanel>
             </Tabs>
           </x.div>
