@@ -4,10 +4,9 @@ import api from 'services/api'
 import Pokemon from 'types'
 
 const getPokemon = async (url: string) => {
-  url = url.replace('https://pokeapi.co/api/v2/pokemon/', '')
   if (url) {
+    url = url.replace('https://pokeapi.co/api/v2/pokemon/', '')
     const { data } = await api.get<Pokemon>(`pokemon/${url}`)
-
     return data
   }
 }
