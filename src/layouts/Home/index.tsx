@@ -85,7 +85,7 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
           fontWeight="bold"
           height="40px"
           placeholder="Search"
-          w="800px"
+          w={{ lg: '800px', md: '85%', sm: '100%', xs: '100%' }}
           m={4}
           p={2}
           type="text"
