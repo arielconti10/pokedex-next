@@ -8,6 +8,7 @@ import PokemonCard from 'components/PokemonCard'
 import api from 'services/api'
 import { useEffect, useState } from 'react'
 import useDebounce from 'hooks/useDebounce'
+import Container from 'components/Container'
 
 interface HomeLayoutProps {
   initialData: PokemonResult
@@ -129,15 +130,7 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
           {data &&
             data.pages &&
             data.pages.map((page, key) => (
-              <x.div
-                display="flex"
-                flexDirection="row"
-                flexWrap="wrap"
-                justifyContent="center"
-                alignItems="center"
-                w="100%"
-                key={key}
-              >
+              <Container key={key}>
                 {page.results.map((pokemon, index) => {
                   return (
                     <PokemonCard
@@ -147,7 +140,7 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
                     />
                   )
                 })}
-              </x.div>
+              </Container>
             ))}
         </InfiniteScroll>
       )}

@@ -39,4 +39,16 @@ export const PokemonCardWrapper = styled.div`
       fill: rgba(255, 255, 255, 0.1);
     }
   }
+
+  @media (min-width: xs) and (max-width: sm) {
+    width: 100%;
+  }
+
+  @media (min-width: sm) and (max-width: md) {
+    width: 50%;
+  }
+
+  @media (min-width: md) and (max-width: lg) {
+    width: 40%;
+  }
 `
