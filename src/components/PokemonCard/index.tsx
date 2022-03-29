@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Pokemon, { PokemonTypeColors, Type } from 'types'
 import usePokemon from 'hooks/pokemon/usePokemon'
 import IconComponent from 'components/TypeIcon'
-import { PokemonCardWrapper } from './styles'
 
 import Link from 'next/link'
 
@@ -45,7 +44,22 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
 
   return (
     <Link href={`/pokemon/${pokemonData.id}`} passHref>
-      <PokemonCardWrapper style={{ background: backgroundColor }}>
+      <x.div
+        backgroundColor={backgroundColor}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        borderRadius="10px"
+        margin="20px"
+        padding="25px"
+        position="relative"
+        w={{ xs: '100%', md: '25%' }}
+        cursor="pointer"
+        transition="all 0.3s ease-in-out"
+        transform={{ hover: 'scale(1.05)' }}
+        zIndex="10"
+      >
         {pokemonData.id ? (
           <>
             <x.p
@@ -109,7 +123,7 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
         >
           {pokemonData.name}
         </x.h1>
-      </PokemonCardWrapper>
+      </x.div>
     </Link>
   )
 }

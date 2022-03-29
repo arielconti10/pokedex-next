@@ -36,6 +36,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#06092B" />
         <meta name="description" content="Next Boilerplate" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       <DefaultSeo {...SEO} />
