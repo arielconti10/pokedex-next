@@ -30,7 +30,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <title>Next Boilerplate</title>
+        <title>Pokedéx</title>
         <link rel="shortcut icon" href="/img/pokedex-512.png" />
         <link rel="apple-touch-icon" href="/img/pokedex-512.png" />
         <link rel="manifest" href="/manifest.json" />

@@ -4,24 +4,24 @@
  * @see https://github.com/garmeeh/next-seo
  */
 export default {
-  titleTemplate: '%s - Next Boilerplate ',
+  titleTemplate: '%s - Pokedéx',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://vini-boilerplate.vercel.app',
-    site_name: 'Next Boilerplate',
-    title: 'Next Boilerplate',
+    url: 'https://pokedex-next-wine.vercel.app',
+    site_name: 'Pokedéx',
+    title: 'Pokedéx',
     images: [
       {
-        url: 'https://raw.githubusercontent.com/viniciushvc/next-boilerplate/master/public/img/icon-512.png',
+        url: 'https://raw.githubusercontent.com/arielconti10/next-pokedex/master/public/img/icon-512.png',
         width: 512,
         height: 512,
-        alt: 'Next Boilerplate'
+        alt: 'Pokedéx'
       }
     ]
   },
   twitter: {
-    handle: '@viniciushvc',
+    handle: '@arielconti10',
     site: 'http',
     cardType: 'summary_large_image'
   }
