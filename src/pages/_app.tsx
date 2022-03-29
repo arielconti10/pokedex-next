@@ -31,8 +31,8 @@ const App = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <title>Next Boilerplate</title>
-        <link rel="shortcut icon" href="/img/pokemon-logo.png" />
-        <link rel="apple-touch-icon" href="/img/pokemon-logo.png" />
+        <link rel="shortcut icon" href="/img/pokedex-512.png" />
+        <link rel="apple-touch-icon" href="/img/pokedex-512.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#06092B" />
         <meta name="description" content="Pokedéx!" />
