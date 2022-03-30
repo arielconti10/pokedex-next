@@ -51,7 +51,7 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
         alignItems="center"
         justifyContent="center"
         borderRadius="10px"
-        margin="20px"
+        margin={{ _: '10px 20px 5px 20px', md: '20px' }}
         padding="25px"
         position="relative"
         w={{ xs: '100%', md: '25%' }}
