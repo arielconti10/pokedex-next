@@ -267,20 +267,11 @@ const PokemonLayout = () => {
                   justifyContent="space-between"
                 >
                   {pokemonEvolutinsFormatted &&
-                    pokemonEvolutinsFormatted?.map(
-                      (pokemonFormatted, index) => (
-                        <x.div key={pokemonFormatted.name}>
-                          <PokemonEvolution pokemonInfo={pokemonFormatted} />
-                          {index !== pokemonEvolutinsFormatted.length - 1 && (
-                            <Image
-                              src="/assets/caretRight.svg"
-                              width="20px"
-                              height="20px"
-                            />
-                          )}
-                        </x.div>
-                      )
-                    )}
+                    pokemonEvolutinsFormatted?.map((pokemonFormatted) => (
+                      <x.div key={pokemonFormatted.name}>
+                        <PokemonEvolution pokemonInfo={pokemonFormatted} />
+                      </x.div>
+                    ))}
                 </x.div>
               </TabPanel>
             </Tabs>
