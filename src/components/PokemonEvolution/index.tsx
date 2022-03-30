@@ -14,7 +14,13 @@ const PokemonEvolution = ({
   return (
     <>
       {data && (
-        <x.div display="flex" flexDirection="column" mt={2}>
+        <x.div
+          alignItems="center"
+          justifyContent="center"
+          display="flex"
+          flexDirection="column"
+          mt={2}
+        >
           <x.div>
             <x.p
               fontSize="xl"

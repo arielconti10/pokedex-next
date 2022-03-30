@@ -119,21 +119,22 @@ const PokemonLayout = () => {
         <div>Loading...</div>
       ) : (
         <x.div
-          w="75%"
-          h="650px"
+          w={{ xs: '90%', md: '75%' }}
+          h={{ xs: '100%', md: '650px' }}
           borderRadius="lg"
           boxShadow="lg"
           display="flex"
-          flexDirection="row"
+          flexDirection={{ xs: 'column', md: 'row' }}
           justifyContent="space-between"
+          mb={10}
         >
           <x.div
             display="flex"
             flexDirection="column"
-            w="50%"
+            w={{ xs: '100%', sm: '100%', md: '50%' }}
             h="100%"
             mx="auto"
-            borderRadius="lg 0 0 lg"
+            borderRadius="lg lg 0 0"
             boxShadow="lg"
             backgroundColor={
               selectedBackgroundColor ? selectedBackgroundColor.light : '#fff'
@@ -196,9 +197,9 @@ const PokemonLayout = () => {
           </x.div>
 
           <x.div
-            borderRadius="0 lg lg 0"
+            borderRadius={{ _: '0', md: '0 lg lg 0' }}
             boxShadow="lg"
-            w="50%"
+            w={{ xs: '100%', md: '50%' }}
             backgroundColor="white"
             py={6}
             px={10}
@@ -261,8 +262,8 @@ const PokemonLayout = () => {
               <TabPanel>
                 <x.div
                   display="flex"
-                  flexDirection="row"
-                  gap="20px"
+                  flexDirection={{ _: 'column', md: 'row' }}
+                  gap={{ _: '10px', md: '20px' }}
                   justifyContent="space-between"
                 >
                   {pokemonEvolutinsFormatted &&
