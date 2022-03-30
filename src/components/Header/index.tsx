@@ -13,8 +13,8 @@ const Header = ({ children }: HeaderProps) => {
       alignItems="center"
       justifyContent="space-between"
       w="100%"
-      px={10}
-      py={2}
+      px={{ _: 2, md: 10 }}
+      py={{ _: 1, md: 2 }}
       color="white"
       fontSize="lg"
       fontWeight="medium"

@@ -11,30 +11,16 @@ const Navigation = () => {
       display="flex"
       flexDirection="row"
       alignItems="center"
-      justifyContent="space-between"
-      w="350px"
+      justifyContent="flex-end"
+      w={{ _: '100%', md: '350px' }}
       p={2}
     >
       <x.ul
-        display={{ _: 'none', md: 'flex' }}
+        display={{ _: 'flex', md: 'flex' }}
         alignItems="center"
         color="text"
         gap={5}
       >
-        <x.li>
-          <Link href="/" passHref>
-            <x.a color={{ _: 'currentColor', hover: 'primary-700' }} href="/">
-              Home
-            </x.a>
-          </Link>
-        </x.li>
-        <x.li>
-          <Link href="/" passHref>
-            <x.a color={{ _: 'currentColor', hover: 'primary-700' }} href="/">
-              About
-            </x.a>
-          </Link>
-        </x.li>
         <x.li>
           <ToggleTheme />
         </x.li>
