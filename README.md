@@ -1,8 +1,4 @@
-
-  <img  src="https://raw.githubusercontent.com/viniciushvc/next-boilerplate/master/public/img/icon-192.png" />
-
-
-Start your project with Next and all <a href='#--technologies'>modern technologies</a>.
+This application is a simple Pokedéx using NextJS
 
 ![ci](https://github.com/viniciushvc/next-boilerplate/workflows/ci/badge.svg)
 
@@ -28,10 +24,10 @@ Start your project with Next and all <a href='#--technologies'>modern technologi
 
 ## :desktop_computer: Getting Started
 
-First, run next-app using this template
+First, clone this repo
 
 ```bash
-  yarn create next-app -e https://github.com/viniciushvc/next-boilerplate my-app
+  git clone https://github.com/arielconti10/pokedex-next.git
 ```
 
 Second, install packages
@@ -80,7 +76,3 @@ next.config.js
 -   return config
 - }
 ```
-
-## :zap: Show your support
-
-Give a ⭐️ if this template helped you!
