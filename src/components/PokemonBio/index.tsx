@@ -14,7 +14,7 @@ export const PokemonBio = ({ pokemonData, pokemonInfo }: PokemonBioProps) => {
     pokemonData.gender_rate !== -1 ? (pokemonData.gender_rate / 8) * 100 : -1
 
   return (
-    <x.div w={{ _: '100%', md: '380px' }} margin="0 auto">
+    <x.div w={{ _: '100%', md: '380px', xl: '580px' }} margin="0 auto">
       <x.h3 color="gray-600" fontSize="lg" fontWeight="bold">
         Pokemon Data
       </x.h3>

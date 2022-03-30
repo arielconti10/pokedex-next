@@ -127,6 +127,7 @@ const PokemonLayout = () => {
           flexDirection={{ xs: 'column', md: 'row' }}
           justifyContent="space-between"
           mb={10}
+          mt={5}
         >
           <x.div
             display="flex"
@@ -134,7 +135,7 @@ const PokemonLayout = () => {
             w={{ xs: '100%', sm: '100%', md: '50%' }}
             h="100%"
             mx="auto"
-            borderRadius="lg lg 0 0"
+            borderRadius={{ _: 'lg lg 0 0', md: 'lg 0 0 lg' }}
             boxShadow="lg"
             backgroundColor={
               selectedBackgroundColor ? selectedBackgroundColor.light : '#fff'
