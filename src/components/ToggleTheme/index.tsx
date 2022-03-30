@@ -16,7 +16,7 @@ export const ToggleTheme = ({ ...props }: SystemProps) => {
       }}
       {...props}
     >
-      {colorMode === 'default' ? <FiMoon /> : <FiSun />}
+      {colorMode === 'default' ? <FiMoon size={24} /> : <FiSun size={24} />}
     </x.button>
   )
 }
