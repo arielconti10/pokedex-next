@@ -197,7 +197,7 @@ const PokemonLayout = () => {
           </x.div>
 
           <x.div
-            borderRadius={{ _: '0', md: '0 lg lg 0' }}
+            borderRadius={{ _: ' 0 0 lg lg', md: '0 lg lg 0' }}
             boxShadow="lg"
             w={{ xs: '100%', md: '50%' }}
             backgroundColor="white"
