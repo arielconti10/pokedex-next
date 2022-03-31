@@ -21,7 +21,7 @@ export const PokemonStats = ({ pokemonInfoData }: PokemonStatsProps) => {
 
   const selectedBackgroundColor = backgroundColors && backgroundColors[0]
   return (
-    <x.div w={{ _: '100%', md: '380px', xl: '560px' }} margin="0 auto">
+    <x.div w={{ _: '100%' }} margin="0 auto">
       {pokemonInfoData &&
         pokemonInfoData.stats &&
         pokemonInfoData.stats.map((st, key) => (
@@ -29,7 +29,7 @@ export const PokemonStats = ({ pokemonInfoData }: PokemonStatsProps) => {
             key={key}
             display="flex"
             my={5}
-            w={{ _: '100%', md: '380px', xl: '560px' }}
+            w={{ _: '100%' }}
             justifyContent="space-between"
             alignItems="center"
             flexDirection={{ _: 'column', md: 'row' }}
@@ -49,7 +49,7 @@ export const PokemonStats = ({ pokemonInfoData }: PokemonStatsProps) => {
             </x.div>
 
             <x.div
-              w={{ _: '100%', md: '250px', xl: '400px' }}
+              w={{ _: '100%', xl: '75%' }}
               backgroundColor="gray-200"
               borderRadius="8px"
               maxHeight="10px"
