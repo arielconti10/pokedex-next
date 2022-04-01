@@ -37,6 +37,7 @@ const PokemonLayout = () => {
     {
       name: string
       url: string
+      evolvesLevel: number
     }[]
   >()
 
@@ -60,7 +61,8 @@ const PokemonLayout = () => {
 
       pokemonFormatted.push({
         name: pokemonEvolutions.chain.species.name,
-        url: pokemonEvolutions.chain.species.url
+        url: pokemonEvolutions.chain.species.url,
+        evolvesLevel: 0
       })
 
       const recursive = (evolvesTo: ChainLink[]) => {
@@ -68,7 +70,8 @@ const PokemonLayout = () => {
           evolvesTo.forEach((evolve: ChainLink) => {
             pokemonFormatted.push({
               name: evolve.species.name,
-              url: evolve.species.url
+              url: evolve.species.url,
+              evolvesLevel: evolve.evolution_details[0].min_level
             })
             recursive(evolve.evolves_to)
           })
@@ -107,7 +110,6 @@ const PokemonLayout = () => {
       const [[, backgroundColor]] = Object.entries(PokemonTypeColors).filter(
         ([key]) => key === type.name
       )
-
       return backgroundColor
     })
 
@@ -263,13 +265,17 @@ const PokemonLayout = () => {
               <TabPanel>
                 <x.div
                   display="flex"
+                  flexWrap="wrap"
                   flexDirection={{ _: 'column', md: 'row' }}
                   gap={{ _: '10px', md: '20px' }}
                   justifyContent="space-between"
                 >
                   {pokemonEvolutinsFormatted &&
                     pokemonEvolutinsFormatted?.map((pokemonFormatted) => (
-                      <x.div key={pokemonFormatted.name}>
+                      <x.div
+                        key={pokemonFormatted.name}
+                        w={{ _: '100%', md: '45%' }}
+                      >
                         <PokemonEvolution pokemonInfo={pokemonFormatted} />
                       </x.div>
                     ))}
