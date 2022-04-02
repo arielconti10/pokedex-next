@@ -121,8 +121,9 @@ const PokemonLayout = () => {
         <div>Loading...</div>
       ) : (
         <x.div
+          minHeight="600px"
           w={{ xs: '90%', md: '75%' }}
-          h={{ xs: '100%', md: '650px' }}
+          h={{ xs: '100%', md: '100%' }}
           borderRadius="lg"
           boxShadow="lg"
           display="flex"
@@ -135,7 +136,6 @@ const PokemonLayout = () => {
             display="flex"
             flexDirection="column"
             w={{ xs: '100%', sm: '100%', md: '50%' }}
-            h="100%"
             mx="auto"
             borderRadius={{ _: 'lg lg 0 0', md: 'lg 0 0 lg' }}
             boxShadow="lg"
@@ -274,7 +274,7 @@ const PokemonLayout = () => {
                     pokemonEvolutinsFormatted?.map((pokemonFormatted) => (
                       <x.div
                         key={pokemonFormatted.name}
-                        w={{ _: '100%', md: '45%' }}
+                        w={{ _: '100%', xl: '30%' }}
                       >
                         <PokemonEvolution pokemonInfo={pokemonFormatted} />
                       </x.div>
