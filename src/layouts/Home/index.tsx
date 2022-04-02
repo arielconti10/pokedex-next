@@ -27,7 +27,7 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
 
   const getPokemons = async ({ pageParam = 0 }) => {
     const { data } = await api.get<PokemonResult>(
-      `pokemon?limit=21&offset=${pageParam}`
+      `pokemon?limit=20&offset=${pageParam}`
     )
     return data
   }
