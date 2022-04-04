@@ -3,6 +3,7 @@ import usePokemon from 'hooks/pokemon/usePokemon'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { TailSpin } from 'react-loader-spinner'
 
 import { getBackgroundColor, leftPad } from 'utils'
 
@@ -26,7 +27,11 @@ const PokemonEvolution = ({
   }, [data])
 
   if (!data) {
-    return <p>Loading</p>
+    return (
+      <x.div alignItems="center" display="flex" justifyContent="center">
+        <TailSpin color="#CCC" height={80} width={80} />
+      </x.div>
+    )
   }
 
   return (

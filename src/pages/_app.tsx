@@ -1,6 +1,5 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
