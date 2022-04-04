@@ -22,7 +22,7 @@ const BaseLayout = ({ children, ...props }: BaseLayoutProps) => {
         <Navigation />
       </Header>
       {children}
-      <x.div position="absolute" bottom="10" fontWeight="medium">
+      <x.footer position="absolute" bottom="5" fontWeight="medium">
         Made with ❤️ by{' '}
         <x.a
           href="https://github.com/arielconti10"
@@ -33,7 +33,7 @@ const BaseLayout = ({ children, ...props }: BaseLayoutProps) => {
         >
           Ariel Conti
         </x.a>
-      </x.div>
+      </x.footer>
     </x.main>
   )
 }
