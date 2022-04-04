@@ -63,7 +63,7 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
         {pokemonData.id ? (
           <>
             <x.p
-              fontSize={{ _: '2xl', md: '6xl' }}
+              fontSize={{ _: '6xl' }}
               fontWeight="semibold"
               opacity={1}
               position="absolute"
