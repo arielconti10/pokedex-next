@@ -2,8 +2,9 @@ import { x } from '@xstyled/styled-components'
 import usePokemon from 'hooks/pokemon/usePokemon'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
-import { leftPad } from 'utils'
+import { getBackgroundColor, leftPad } from 'utils'
 
 const PokemonEvolution = ({
   pokemonInfo
@@ -15,6 +16,14 @@ const PokemonEvolution = ({
   }
 }) => {
   const { data } = usePokemon(pokemonInfo.name)
+  const [backgroundColor, setBackgroundColor] = useState('')
+
+  useEffect(() => {
+    if (data) {
+      const bgColor = getBackgroundColor(data.types[0])
+      setBackgroundColor(bgColor[1].light)
+    }
+  }, [data])
 
   if (!data) {
     return <p>Loading</p>
@@ -28,7 +37,7 @@ const PokemonEvolution = ({
         display="flex"
         flexDirection="column"
         mt={2}
-        bg="gray-300"
+        bg={backgroundColor}
         borderRadius="10px"
         p={2}
         cursor="pointer"
