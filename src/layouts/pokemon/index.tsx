@@ -135,8 +135,8 @@ const PokemonLayout = () => {
               <x.a
                 textDecoration={{ hover: 'underline' }}
                 color={{
-                  _: 'gray-500',
-                  hover: colorMode === 'light' ? 'gray-100' : 'gray-900'
+                  _: colorMode !== 'default' ? 'gray-100' : 'gray-900',
+                  hover: colorMode !== 'default' ? 'gray-100' : 'gray-900'
                 }}
               >
                 Previous
@@ -146,8 +146,8 @@ const PokemonLayout = () => {
               <x.a
                 textDecoration={{ hover: 'underline' }}
                 color={{
-                  _: 'gray-500',
-                  hover: colorMode === 'light' ? 'gray-100' : 'gray-900'
+                  _: colorMode !== 'default' ? 'gray-100' : 'gray-900',
+                  hover: colorMode !== 'default' ? 'gray-100' : 'gray-900'
                 }}
               >
                 Next
