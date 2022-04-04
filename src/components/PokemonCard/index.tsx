@@ -70,6 +70,7 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
               top="0"
               pointerEvents="none"
               zIndex={2}
+              textShadow="0 2px 2px black"
             >
               # {leftPad(pokemonData.id, 3)}
             </x.p>
