@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { x } from '@xstyled/styled-components'
 import Image from 'next/image'
+import Link from 'next/link'
 
-import Pokemon, { PokemonTypeColors, Type } from 'types'
 import usePokemon from 'hooks/pokemon/usePokemon'
 import IconComponent from 'components/TypeIcon'
-
-import Link from 'next/link'
+import Pokemon from 'types'
+import { leftPad, getBackgroundColor } from 'utils'
 
 export type PokemonCardProps = {
   pokemonId: number
@@ -26,21 +26,6 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
       setBackgroundColor(backgroundColor[1].light)
     }
   }, [data])
-
-  function getBackgroundColor(type: Type) {
-    const [backgroundColor] = Object.entries(PokemonTypeColors).filter(
-      ([key]) => key === type.type.name
-    )
-    return backgroundColor
-  }
-
-  const leftPad = (number: number, targetLength: number): string => {
-    let output = Math.abs(number).toString()
-    while (output.length < Math.abs(targetLength)) {
-      output = '0' + output
-    }
-    return output
-  }
 
   return (
     <Link href={`/pokemon/${pokemonData.id}`} passHref>
