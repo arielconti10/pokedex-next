@@ -1,14 +1,21 @@
+import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import { x, useColorMode } from '@xstyled/styled-components'
 import { InfiniteData, useInfiniteQuery } from 'react-query'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-import { PokemonResult } from 'hooks/pokemon/usePokemons'
 import BaseLayout from 'layouts/Base'
-import PokemonCard from 'components/PokemonCard'
-import api from 'services/api'
-import { useEffect, useState } from 'react'
-import useDebounce from 'hooks/useDebounce'
+
 import Container from 'components/Container'
+
+const PokemonCard = dynamic(() => import('components/PokemonCard'), {
+  loading: () => <p>Loading...</p>
+})
+
+import { PokemonResult } from 'hooks/pokemon/usePokemons'
+import useDebounce from 'hooks/useDebounce'
+
+import api from 'services/api'
 
 interface HomeLayoutProps {
   initialData: PokemonResult

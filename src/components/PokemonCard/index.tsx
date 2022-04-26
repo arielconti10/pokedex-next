@@ -39,7 +39,7 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
         margin={{ _: '10px 20px 5px 20px', md: '20px' }}
         padding="25px"
         position="relative"
-        w={{ xs: '100%', md: '20%' }}
+        w={{ xs: '100%', md: '28%', lg: '28%', xl: '20%' }}
         cursor="pointer"
         transition="all 0.3s ease-in-out"
         transform={{ hover: 'scale(1.05)' }}

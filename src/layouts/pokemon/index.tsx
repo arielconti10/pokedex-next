@@ -8,6 +8,7 @@ import BaseLayout from 'layouts/Base'
 
 import usePokemonSpecie from 'hooks/pokemon/usePokemonSpecie'
 import usePokemon from 'hooks/pokemon/usePokemon'
+
 import Pokemon, {
   ChainLink,
   EvolutionChain,
@@ -255,6 +256,7 @@ const PokemonLayout = () => {
                         paddingBottom="5px"
                         fontWeight="bold"
                         fontSize="18px"
+                        cursor="pointer"
                       >
                         Biography
                       </x.h3>
@@ -265,6 +267,7 @@ const PokemonLayout = () => {
                         paddingBottom="5px"
                         fontWeight="bold"
                         fontSize="18px"
+                        cursor="pointer"
                       >
                         Stats
                       </x.h3>
@@ -275,6 +278,7 @@ const PokemonLayout = () => {
                         paddingBottom="5px"
                         fontWeight="bold"
                         fontSize="18px"
+                        cursor="pointer"
                       >
                         Evolutions
                       </x.h3>
