@@ -11,7 +11,7 @@ module.exports = withBundleAnalyzer(
   withPWA({
     reactStrictMode: true,
     swcMinify: true,
-    experimental: {
+    compiler: {
       // Enables the styled-components SWC transform
       styledComponents: true
     },
@@ -28,6 +28,15 @@ module.exports = withBundleAnalyzer(
       maxHeight: 1080,
       quality: 80
     },
+    headers: [
+      {
+        source: '/:all*(svg|jpg|png)',
+        locale: false,
+        key: 'Cache-Control',
+        value: 'public, max-age=31536000, immutable',
+      },
+    ],
+
     // Replace React with Preact
     webpack: (config, { dev, isServer }) => {
       // only in client production build

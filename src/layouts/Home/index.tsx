@@ -3,9 +3,7 @@ import dynamic from 'next/dynamic'
 import { x, useColorMode } from '@xstyled/styled-components'
 import { InfiniteData, useInfiniteQuery } from 'react-query'
 import InfiniteScroll from 'react-infinite-scroll-component'
-
 import BaseLayout from 'layouts/Base'
-
 import Container from 'components/Container'
 
 const PokemonCard = dynamic(() => import('components/PokemonCard'), {
@@ -14,7 +12,6 @@ const PokemonCard = dynamic(() => import('components/PokemonCard'), {
 
 import { PokemonResult } from 'hooks/pokemon/usePokemons'
 import useDebounce from 'hooks/useDebounce'
-
 import api from 'services/api'
 
 interface HomeLayoutProps {
@@ -134,21 +131,19 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
             </p>
           }
         >
-          {data &&
-            data.pages &&
-            data.pages.map((page, key) => (
-              <Container key={key}>
-                {page.results.map((pokemon, index) => {
-                  return (
-                    <PokemonCard
-                      key={index}
-                      pokemonId={index + 1}
-                      pokemonUrl={pokemon.url}
-                    />
-                  )
-                })}
-              </Container>
-            ))}
+          {data?.pages.map((page, key) => (
+            <Container key={key}>
+              {page.results.map((pokemon, index) => {
+                return (
+                  <PokemonCard
+                    key={index}
+                    pokemonId={index + 1}
+                    pokemonUrl={pokemon.url}
+                  />
+                )
+              })}
+            </Container>
+          ))}
         </InfiniteScroll>
       )}
     </BaseLayout>

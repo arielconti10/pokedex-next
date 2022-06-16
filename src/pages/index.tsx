@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
-
 import HomeLayout from 'layouts/Home'
 import { PokemonResult } from 'hooks/pokemon/usePokemons'
 import api from 'services/api'
@@ -13,7 +12,6 @@ const HomePage = ({ pokemons }: HomePageProps) => {
   return (
     <>
       <NextSeo title="Home" />
-
       <HomeLayout initialData={pokemons} />
     </>
   )

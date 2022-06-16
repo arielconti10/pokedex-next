@@ -36,6 +36,12 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="theme-color" content="#06092B" />
         <meta name="description" content="Pokedéx!" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8515008560433715"
+          crossOrigin="anonymous"
+        />
       </Head>
 
       <DefaultSeo {...SEO} />
