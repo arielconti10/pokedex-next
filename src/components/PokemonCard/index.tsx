@@ -67,7 +67,8 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
                     .front_default as string
                 }
                 alt={pokemonData.name || 'Pokemon name'}
-                layout="fill"
+                width={180}
+                height={180}
                 objectFit="cover"
               />
             </x.div>
