@@ -96,7 +96,6 @@ const HomeLayout = ({ initialData }: HomeLayoutProps) => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </x.div>
-
       {searchedPokemons && searchedPokemons.length > 0 ? (
         <x.div
           display="flex"
