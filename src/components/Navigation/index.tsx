@@ -25,7 +25,7 @@ const Navigation = () => {
           <ToggleTheme />
         </x.li>
         <x.li>
-          <Link href="https://github.com/arielconti10/next-pokedex" passHref>
+          <Link href="https://github.com/arielconti10/pokedex-next" passHref>
             <Image
               src={
                 colorMode === 'default'
