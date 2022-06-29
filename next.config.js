@@ -20,6 +20,7 @@ module.exports = withBundleAnalyzer(
       disable: !isProd
     },
     images: {
+      allowFutureImage: true,
       domains: ['images.ctfassets.net', 'raw.githubusercontent.com'],
       dangerouslyAllowSVG: true,
       contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

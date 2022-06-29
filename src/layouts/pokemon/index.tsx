@@ -1,13 +1,18 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useColorMode, x } from '@xstyled/styled-components'
 import { useRouter } from 'next/router'
-
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import Link from 'next/link'
+import Image from 'next/future/image'
 
 import BaseLayout from 'layouts/Base'
-
 import usePokemonSpecie from 'hooks/pokemon/usePokemonSpecie'
 import usePokemon from 'hooks/pokemon/usePokemon'
+import { PokemonBio } from 'components/PokemonBio'
+import { PokemonStats } from 'components/PokemonStats'
+import PokemonEvolution from 'components/PokemonEvolution'
+import api from 'services/api'
+import { leftPad } from 'utils'
 
 import Pokemon, {
   ChainLink,
@@ -15,14 +20,6 @@ import Pokemon, {
   PokemonSpecie,
   PokemonTypeColors
 } from 'types'
-import Image from 'next/image'
-
-import { PokemonBio } from 'components/PokemonBio'
-import { PokemonStats } from 'components/PokemonStats'
-import api from 'services/api'
-import PokemonEvolution from 'components/PokemonEvolution'
-import { leftPad } from 'utils'
-import Link from 'next/link'
 
 const PokemonLayout = () => {
   const router = useRouter()
