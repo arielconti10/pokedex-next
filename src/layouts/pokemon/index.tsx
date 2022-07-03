@@ -14,23 +14,16 @@ import PokemonEvolution from 'components/PokemonEvolution'
 import api from 'services/api'
 import { leftPad } from 'utils'
 
-import Pokemon, {
-  ChainLink,
-  EvolutionChain,
-  PokemonSpecie,
-  PokemonTypeColors
-} from 'types'
+import Pokemon, { ChainLink, EvolutionChain, PokemonTypeColors } from 'types'
+import { PokemonPageProps } from 'pages/pokemon/[id]'
 
-const PokemonLayout = () => {
+const PokemonLayout = ({ pokemon, pokemonSpecie }: PokemonPageProps) => {
   const router = useRouter()
   const { id } = router.query
 
-  const [pokemonData, setPokemonData] = useState<PokemonSpecie>(
-    {} as PokemonSpecie
-  )
+  const [pokemonInfo] = useState<Pokemon>(pokemon)
 
   const [colorMode] = useColorMode()
-  const [pokemonInfo, setPokemonInfo] = useState<Pokemon>({} as Pokemon)
   const [pokemonEvolutions, setPokemonEvolutions] = useState<EvolutionChain>()
   const [pokemonEvolutinsFormatted, setPokemonEvolutinsFormatted] = useState<
     {
@@ -40,19 +33,19 @@ const PokemonLayout = () => {
     }[]
   >()
 
-  const { data, isLoading, isSuccess } = usePokemonSpecie(id as string)
+  const { isLoading } = usePokemonSpecie(id as string)
   const { data: pokemonInfoData } = usePokemon(id as string)
 
   // get pokemon evolutions
   const getPokemonEvolutions = useCallback(async () => {
-    if (pokemonData && pokemonData.evolution_chain) {
+    if (pokemonSpecie && pokemonSpecie.evolution_chain) {
       const { data } = await api.get<EvolutionChain>(
-        `evolution-chain/${pokemonData.evolution_chain.url.split('/')[6]}`
+        `evolution-chain/${pokemonSpecie.evolution_chain.url.split('/')[6]}`
       )
 
       setPokemonEvolutions(data)
     }
-  }, [pokemonData])
+  }, [pokemonSpecie])
 
   const getPokemonEvolutionsFormatted = useCallback(() => {
     if (pokemonEvolutions) {
@@ -83,14 +76,7 @@ const PokemonLayout = () => {
   }, [pokemonEvolutions])
 
   useEffect(() => {
-    if (isSuccess && data) {
-      setPokemonData(data)
-    }
-  }, [data, isSuccess])
-
-  useEffect(() => {
     if (pokemonInfoData) {
-      setPokemonInfo(pokemonInfoData)
       getPokemonEvolutions()
     }
   }, [pokemonInfoData, getPokemonEvolutions])
@@ -100,10 +86,12 @@ const PokemonLayout = () => {
   }, [pokemonEvolutions, getPokemonEvolutionsFormatted])
 
   const kanjiName =
-    pokemonData.names &&
-    pokemonData.names.find((name) => name.language.name === 'ja-Hrkt')
+    pokemonSpecie &&
+    pokemonSpecie.names &&
+    pokemonSpecie.names.find((name) => name.language.name === 'ja-Hrkt')
 
   const backgroundColors =
+    pokemonInfo &&
     pokemonInfo.types &&
     pokemonInfo.types.map(({ type }) => {
       const [[, backgroundColor]] = Object.entries(PokemonTypeColors).filter(
@@ -127,7 +115,9 @@ const PokemonLayout = () => {
             justifyContent="space-between"
           >
             <Link
-              href={pokemonData.id > 1 ? `/pokemon/${pokemonData.id - 1}` : '/'}
+              href={
+                pokemonSpecie.id > 1 ? `/pokemon/${pokemonSpecie.id - 1}` : '/'
+              }
               passHref
             >
               <x.a
@@ -140,7 +130,7 @@ const PokemonLayout = () => {
                 Previous
               </x.a>
             </Link>
-            <Link href={`/pokemon/${pokemonData.id + 1}`} passHref>
+            <Link href={`/pokemon/${pokemonSpecie.id + 1}`} passHref>
               <x.a
                 textDecoration={{ hover: 'underline' }}
                 color={{
@@ -183,7 +173,7 @@ const PokemonLayout = () => {
                   fontWeight="bold"
                   className="text-md mt-4 text-white font-medium"
                 >
-                  #{leftPad(pokemonData.id, 3)}
+                  #{leftPad(pokemonSpecie.id, 3)}
                 </x.p>
                 <x.h1
                   fontSize={{ _: '2xl', md: '3xl', lg: '4xl' }}
@@ -192,7 +182,7 @@ const PokemonLayout = () => {
                   pb="4"
                   textTransform="capitalize"
                 >
-                  {pokemonData.name}
+                  {pokemonSpecie.name}
                 </x.h1>
               </x.div>
               <x.div
@@ -284,9 +274,9 @@ const PokemonLayout = () => {
                 </TabList>
 
                 <TabPanel>
-                  {pokemonData && pokemonInfo && (
+                  {pokemonSpecie && pokemonInfo && (
                     <PokemonBio
-                      pokemonData={pokemonData}
+                      pokemonData={pokemonSpecie}
                       pokemonInfo={pokemonInfo}
                     />
                   )}

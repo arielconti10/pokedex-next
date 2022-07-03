@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { x } from '@xstyled/styled-components'
-import Image from 'next/image'
+import Image from 'next/future/image'
 import Link from 'next/link'
 
 import usePokemon from 'hooks/pokemon/usePokemon'
@@ -69,7 +69,6 @@ const PokemonCard = ({ pokemonUrl }: PokemonCardProps) => {
                 alt={pokemonData.name || 'Pokemon name'}
                 width={180}
                 height={180}
-                objectFit="cover"
               />
             </x.div>
           </>

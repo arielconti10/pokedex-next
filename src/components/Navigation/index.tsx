@@ -1,6 +1,6 @@
 import { x, useColorMode } from '@xstyled/styled-components'
 import ToggleTheme from 'components/ToggleTheme'
-import Image from 'next/image'
+import Image from 'next/future/image'
 import Link from 'next/link'
 
 const Navigation = () => {

@@ -1,6 +1,6 @@
 import { x } from '@xstyled/styled-components'
 import usePokemon from 'hooks/pokemon/usePokemon'
-import Image from 'next/image'
+import Image from 'next/future/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { TailSpin } from 'react-loader-spinner'
