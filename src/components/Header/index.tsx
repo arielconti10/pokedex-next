@@ -1,5 +1,6 @@
+import { memo } from 'react';
 import { SystemProps, x } from '@xstyled/styled-components'
-import Image from 'next/future/image'
+import Image from 'next/image'
 
 export type HeaderProps = {
   children?: React.ReactNode
@@ -36,4 +37,4 @@ const Header = ({ children }: HeaderProps) => {
   )
 }
 
-export default Header
+export default memo(Header)

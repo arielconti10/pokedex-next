@@ -1,6 +1,7 @@
 import { x, SystemProps } from '@xstyled/styled-components'
 import Header from 'components/Header'
 import Navigation from 'components/Navigation'
+import { memo } from 'react'
 
 type BaseLayoutProps = {
   children?: React.ReactNode
@@ -38,4 +39,4 @@ const BaseLayout = ({ children, ...props }: BaseLayoutProps) => {
   )
 }
 
-export default BaseLayout
+export default memo(BaseLayout)

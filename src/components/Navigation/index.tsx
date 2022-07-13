@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { x, useColorMode } from '@xstyled/styled-components'
 import ToggleTheme from 'components/ToggleTheme'
-import Image from 'next/future/image'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const Navigation = () => {
@@ -43,4 +44,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation
+export default memo(Navigation)
