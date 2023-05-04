@@ -4,23 +4,23 @@ import { cache } from 'react';
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 
-// const getBaseUrl = cache(() =>
-//   process.env.VERCEL_URL
-//     ? `https://${process.env.VERCEL_URL}`
-//     : `http://localhost:${process.env.PORT ?? 3000}`,
-// );
+const getBaseUrl = cache(() =>
+  process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : `http://localhost:${process.env.PORT ?? 3000}`,
+);
 
-// async function getData() {
-//   const res = await fetch(`${getBaseUrl()}/api/pokemon`)
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch data")
-//   }
+async function getData() {
+  const res = await fetch(`${getBaseUrl()}/api/pokemon`)
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
 
-//   return res.json()
-// }
+  return res.json()
+}
 
 export default async function IndexPage() {
-  // const data = await getData()
+  const data = await getData()
 
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
@@ -47,7 +47,7 @@ export default async function IndexPage() {
         </div>
 
         <div className="space-4 mt-4 flex w-full flex-row flex-wrap justify-between gap-4">
-          {/* {data && data.map((pokemon) => (
+          {data && data.map((pokemon) => (
             <Card key={data.id} className="flex flex-col items-center">
               <CardContent>
                 <Image
@@ -61,7 +61,7 @@ export default async function IndexPage() {
                 <CardTitle>{pokemon.identifier}</CardTitle>
               </CardFooter>
             </Card>
-          ))} */}
+          ))}
         </div>
 
         {/* <Search /> */}
