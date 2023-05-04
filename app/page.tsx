@@ -6,19 +6,17 @@ import { Input } from "@/components/ui/input"
 
 const getBaseUrl = cache(() =>
   process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
+    ? `${process.env.VERCEL_URL}`
     : `http://localhost:${process.env.PORT ?? 3000}`,
 );
 
 async function getData() {
-  console.log(getBaseUrl())
-  return getBaseUrl()
-  // const res = await fetch(`${getBaseUrl()}/api/pokemon`)
-  // if (!res.ok) {
-  //   throw new Error("Failed to fetch data")
-  // }
+  const res = await fetch(`${getBaseUrl()}/api/pokemon`)
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
 
-  // return res.json()
+  return res.json()
 }
 
 export default async function IndexPage() {
@@ -48,8 +46,8 @@ export default async function IndexPage() {
           </div>
         </div>
 
-        <div className="space-4 mt-4 flex w-full flex-row flex-wrap justify-between gap-4">
-          {/* {data && data.map((pokemon) => (
+        <div className="space-4 grid gap-4 md:grid-cols-3">
+          {data && data.map((pokemon) => (
             <Card key={data.id} className="flex flex-col items-center">
               <CardContent>
                 <Image
@@ -63,7 +61,7 @@ export default async function IndexPage() {
                 <CardTitle>{pokemon.identifier}</CardTitle>
               </CardFooter>
             </Card>
-          ))} */}
+          ))}
         </div>
 
         {/* <Search /> */}
