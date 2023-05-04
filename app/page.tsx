@@ -12,7 +12,7 @@ import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 
 async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/pokemon`)
+  const res = await fetch(`${getBaseUrl}/api/pokemon`)
   if (!res.ok) {
     throw new Error("Failed to fetch data")
   }
