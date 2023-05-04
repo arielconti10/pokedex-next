@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 
 async function getData() {
-  const res = await fetch("http://localhost:3000/api/pokemon")
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/pokemon`)
   if (!res.ok) {
     throw new Error("Failed to fetch data")
   }
@@ -42,7 +42,7 @@ export default async function IndexPage() {
 
         <div className="space-4 mt-4 flex w-full flex-row flex-wrap justify-between gap-4">
           {data && data.map((pokemon) => (
-            <Card className="flex flex-col items-center">
+            <Card key={data.id} className="flex flex-col items-center">
               <CardContent>
                 <Image
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
