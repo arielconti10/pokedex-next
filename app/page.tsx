@@ -1,18 +1,17 @@
 import Image from "next/image"
 import { Search } from "lucide-react"
 import { cache } from 'react';
-
-export const getBaseUrl = cache(() =>
-  process.env.VERCEL_URL
-    ? `https://pokedex-next-tau.vercel.app`
-    : `http://localhost:${process.env.PORT ?? 3000}`,
-);
-
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 
+const getBaseUrl = cache(() =>
+  process.env.VERCEL_URL
+    ? process.env.VERCEL_URL
+    : `http://localhost:${process.env.PORT ?? 3000}`,
+);
+
 async function getData() {
-  const res = await fetch(`${getBaseUrl}/api/pokemon`)
+  const res = await fetch(`${getBaseUrl()}/api/pokemon`)
   if (!res.ok) {
     throw new Error("Failed to fetch data")
   }
